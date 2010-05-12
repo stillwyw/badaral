@@ -2,7 +2,7 @@
 class UsersController extends AppController {
 
 	var $name = 'Users';
-	var $components = array('Auth');
+	var $components = array('Auth','Session');
 	
 	function beforeFilter(){
 		parent::beforeFilter();
@@ -22,9 +22,16 @@ class UsersController extends AppController {
 	 			$this->User->create();
  				if($this->User->save($this->data)){
 	 				if($this->Auth->login($this->data)){
+                                 
 						$this->redirect("home"); 					
-	 				}
- 				}
+	 				}else{
+                                     	}
+ 				}else{
+                                    $this->data['User']['password']='';
+                                    $this->data['User']['password_confirm']='';
+                                    $this->Session->setFlash('something wrong!');
+
+                                }
  			}
  		}
  	}

@@ -22,7 +22,7 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 	Router::connect('/',array('controller' => 'site', 'action' => 'index', 'home'));
-	Router::connect('/singup', array('controller'=>'users', 'action'=>'signup'));
+	Router::connect('/signup', array('controller'=>'users', 'action'=>'signup'));
 	Router::connect('/signin' , array('controller'=>'users','action'=>'login'));
 	Router::connect('/about', array('controller'=>'site', 'action'=>'about'));
  
