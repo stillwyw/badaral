@@ -15,13 +15,14 @@ show up on all of your views, include it here -->
 <div id="header">
     <div id="menu">
     	<?php echo $html->link('首页', '/') ?> 
-    	<?php echo $html->link('关于', '/about') ?>	
+    	<?php echo $html->link('关于', '/about') ?>	 
+    	<?php echo $html->link('我的', '/mine') ?>
     	
     </div>
     <p>
+    	<?php echo $session->flash('auth') ?><p>
+			<?php echo $session->flash() ?>
     	</p>
-    <?php echo $session->flash('Auth.user.username') ?>
-    <?php echo $session->read('Auth.user.username') ?>
     
     
 </div>

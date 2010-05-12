@@ -2,12 +2,11 @@
 class UsersController extends AppController {
 
 	var $name = 'Users';
-	var $components = array('Auth','Session');
+//	var $components = array('Auth','Session');
 	
 	function beforeFilter(){
+		$this->Auth->allow('login','logout','signup');
 		parent::beforeFilter();
-		$this->Auth->allow('login','home','logout','signup');
-
 	}
 
 	function index() {
@@ -38,9 +37,11 @@ class UsersController extends AppController {
  	
 	function login()
 	{
+	
 		if($this->data){
 			$this->Auth->login($this->data);
 		}
+		
 	}
 	
 	
@@ -55,6 +56,13 @@ class UsersController extends AppController {
 		}else{
 			$this->redirect(array('action' => 'login'));
 		}
+	}
+	
+	function show(){
+		
+		
+		
+		
 	}
 	
 	function view($id = null) {
