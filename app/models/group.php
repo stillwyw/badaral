@@ -2,6 +2,15 @@
 class Group extends AppModel {
 	var $name = 'Group';
 	var $displayField = 'name';
+	
+	
+	const _public = 0;
+	const _private = 1;
+	const _semipublic = 2;
+	
+	const open = 0;
+	const closed = 1;
+	
 	var $validate = array(
 		'name' => array(
 			'notempty' => array(

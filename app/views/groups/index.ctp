@@ -5,7 +5,7 @@
 
 
 <div class="groups index">
-	<h2><?php __('Groups');?></h2>
+	<h2><?php __('我的小组');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
@@ -20,27 +20,27 @@
 	</tr>
 	<?php
 	$i = 0;
-	foreach ($groups as $group):
+	foreach ($group_posts as $group_post):
 		$class = null;
 		if ($i++ % 2 == 0) {
 			$class = ' class="altrow"';
 		}
 	?>
 	<tr<?php echo $class;?>>
-		<td><?php echo $group['Group']['id']; ?>&nbsp;</td>
-		<td><?php echo $group['Group']['name']; ?>&nbsp;</td>
-		<td><?php echo $group['Group']['desc']; ?>&nbsp;</td>
+		<td><?php echo $group_post['Group']['id']; ?>&nbsp;</td>
+		<td><?php echo $group_post['Group']['name']; ?>&nbsp;</td>
+		<td><?php echo $group_post['Group']['desc']; ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($group['User']['name'], array('controller' => 'users', 'action' => 'view', $group['User']['id'])); ?>
+			<?php echo $this->Html->link($group_post['User']['username'], array('controller' => 'users', 'action' => 'view', $group_post['User']['id'])); ?>
 		</td>
-		<td><?php echo $group['Group']['created']; ?>&nbsp;</td>
-		<td><?php echo $group['Group']['modifed']; ?>&nbsp;</td>
-		<td><?php echo $group['Group']['status']; ?>&nbsp;</td>
-		<td><?php echo $group['Group']['privacy']; ?>&nbsp;</td>
+		<td><?php echo $group_post['Group']['created']; ?>&nbsp;</td>
+		<td><?php echo $group_post['Group']['updated']; ?>&nbsp;</td>
+		<td><?php echo $group_post['Group']['status']; ?>&nbsp;</td>
+		<td><?php echo $group_post['Group']['privacy']; ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $group['Group']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $group['Group']['id'])); ?>
-			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $group['Group']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $group['Group']['id'])); ?>
+			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $group_post['Group']['id'])); ?>
+			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $group_post['Group']['id'])); ?>
+			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $group_post['Group']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $group_post['Group']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

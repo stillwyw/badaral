@@ -2,6 +2,7 @@
 class GroupPostsController extends AppController {
 
 	var $name = 'GroupPosts';
+	var $components = array('Session');
 
 	function index() {
 		$this->GroupPost->recursive = 0;
