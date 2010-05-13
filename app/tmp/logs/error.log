@@ -192,3 +192,4 @@
 2010-05-13 01:00:03 Warning: Warning (512): Users::isAuthorized() is not defined. in [D:\abc\wwwroot\cake\libs\controller\controller.php, line 808]
 2010-05-13 01:09:03 Warning: Warning (512): Users::isAuthorized() is not defined. in [D:\abc\wwwroot\cake\libs\controller\controller.php, line 808]
 2010-05-13 02:52:43 Warning: Warning (512): Users::isAuthorized() is not defined. in [D:\abc\wwwroot\cake\libs\controller\controller.php, line 808]
+2010-05-13 07:40:27 Warning: Warning (512): Groups::isAuthorized() is not defined. in [D:\abc\wwwroot\cake\libs\controller\controller.php, line 808]

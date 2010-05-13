@@ -1,3 +1,9 @@
+
+
+<?php echo $username ?>
+
+
+
 <div class="groups index">
 	<h2><?php __('Groups');?></h2>
 	<table cellpadding="0" cellspacing="0">

@@ -14,3 +14,7 @@
 2010-05-12 07:59:08 Debug: Notice (8): Undefined index:  username in [D:\abc\wwwroot\app\views\users\home.ctp, line 1]
 2010-05-12 08:24:44 Debug: Notice (8): Undefined property: SiteController::$Session in [D:\abc\wwwroot\app\controllers\site_controller.php, line 11]
 2010-05-13 00:47:28 Debug: Notice (8): Undefined property: SiteController::$Session in [D:\abc\wwwroot\app\controllers\site_controller.php, line 12]
+2010-05-13 08:50:44 Debug: Notice (8): Undefined variable: current_user in [D:\abc\wwwroot\app\controllers\groups_controller.php, line 8]
+2010-05-13 08:51:17 Debug: Notice (8): Undefined variable: current_user in [D:\abc\wwwroot\app\controllers\groups_controller.php, line 8]
+2010-05-13 08:51:42 Debug: Notice (8): Undefined variable: current_user in [D:\abc\wwwroot\app\controllers\groups_controller.php, line 8]
+2010-05-13 08:51:50 Debug: Notice (8): Undefined property: GroupsController::$current_user in [D:\abc\wwwroot\app\controllers\groups_controller.php, line 8]

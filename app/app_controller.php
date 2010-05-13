@@ -17,8 +17,28 @@ class AppController extends Controller {
 		
 		$this->Auth->authorize = 'controller';
 		
+		if($this->Auth->user()){
+			$this->current_user = $this->Auth->user();
+		}
 
 
+	}
+	
+	function isAuthorized() {
+		
+	return true;	
+		
+		
+/*		
+		if ($this->action == 'delete') {
+			if ($this->Auth->user('role') == 'admin') {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return true;
+*/
 	}
 
 

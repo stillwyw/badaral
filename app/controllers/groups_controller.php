@@ -5,6 +5,7 @@ class GroupsController extends AppController {
 
 	function index() {
 		$this->Group->recursive = 0;
+		$this->set('username',$this->current_user['User']['username']);
 		$this->set('groups', $this->paginate());
 	}
 
