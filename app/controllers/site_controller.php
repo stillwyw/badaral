@@ -2,7 +2,7 @@
 class SiteController extends AppController {
 	var $name='Site';
 	var $uses = null;
-	//var $components = array('Auth','Session');
+	var $components = array('Session');
 
 	function beforeFilter(){
 		$this->Auth->allow('*');

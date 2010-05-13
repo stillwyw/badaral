@@ -2,7 +2,7 @@
 class UsersController extends AppController {
 
 	var $name = 'Users';
-//	var $components = array('Auth','Session');
+	var $components = array('Session');
 	
 	function beforeFilter(){
 		$this->Auth->allow('login','logout','signup');
@@ -26,9 +26,9 @@ class UsersController extends AppController {
 	 				}else{
                                      	}
  				}else{
-                                    $this->data['User']['password']='';
-                                    $this->data['User']['password_confirm']='';
-                                    $this->Session->setFlash('something wrong!');
+                    $this->data['User']['password']='';
+                    $this->data['User']['password_confirm']='';
+                    $this->Session->setFlash('something wrong!');
 
                                 }
  			}
