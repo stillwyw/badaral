@@ -2,20 +2,11 @@
 class GroupsController extends AppController {
 
 	var $name = 'Groups';
-	var $uses = array('GroupPost','Group');
-	var $components = array('Session');
 
 	function index() {
 		$this->Group->recursive = 0;
-		$conditions=array(
-			'Group.user_id'=>$this->current_user['User']['id']
-			);
-
-
-		$gourp_posts = $this->GroupPost->find('all',array('conditions'=>$conditions));
-
 		$this->set('username',$this->current_user['User']['username']);
-		$this->set('group_posts', $this->paginate());
+		$this->set('groups', $this->paginate());
 	}
 
 	function view($id = null) {
