@@ -2,6 +2,10 @@
 class Group extends AppModel {
 	var $name = 'Group';
 	var $displayField = 'name';
+	const admin = 2;
+	const manager = 1;
+	const member = 0;
+	
 	var $validate = array(
 		'name' => array(
 			'notempty' => array(
@@ -16,10 +20,14 @@ class Group extends AppModel {
 	);
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $belongsTo = array(
+	var $hasAndBelongsToMany = array(
 		'User' => array(
 			'className' => 'User',
-			'foreignKey' => 'user_id',
+			'tableName' => 'users',
+			'foreignKey' => 'group_id',
+			'associationForeignKey' => 'user_id',
+				'joinTable' => 'group_memberships',
+				'unique' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -41,6 +49,19 @@ class Group extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+	
+	
+	function joinedGroups($user_id)
+	{
+		$this->find('all',
+		array(
+			'joins'=>' join group_posts on group_posts.group_id = groups.id',
+			'conditions'=>array('group_posts.user_id = '=>$user_id),
+			'order'=>'groups.created desc'
+		
+		)
+			);
+	}
 
 }
 ?>
