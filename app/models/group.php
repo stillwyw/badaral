@@ -24,6 +24,7 @@ class Group extends AppModel {
 		'User' => array(
 			'className' => 'User',
 			'tableName' => 'users',
+			'with'=>'GroupMembership',
 			'foreignKey' => 'group_id',
 			'associationForeignKey' => 'user_id',
 				'joinTable' => 'group_memberships',

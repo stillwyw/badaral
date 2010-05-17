@@ -6,6 +6,23 @@ class GroupMembership extends AppModel {
 	const manager = 1;
 	const member = 0;
 	
+	var $belongsTo =array(
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Group' => array(
+			'className' => 'Group',
+			'foreignKey' => 'group_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+		);
+/*	
 	function isAMember($groupId,$userId){
 		return $this->find('all',
 									array=>('conditions'=>array('GroupMembership.group_id = '=>$groupId,
@@ -54,6 +71,6 @@ class GroupMembership extends AppModel {
 			return false;
 		}
 	}
-	
+*/	
 }
 ?>

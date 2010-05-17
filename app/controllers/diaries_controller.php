@@ -2,10 +2,13 @@
 class DiariesController extends AppController {
 
 	var $name = 'Diaries';
+	var $uses = array('Diary','DiaryPost','User');
 
 	function index() {
 		
-		$diary_posts = $this->current_user->Diary->DiaryPost->find('all');
+		$diary_posts = $this->User->Diary->DiaryPost->find('all',array(
+			'conditions'=>array('User.id'=>$this->current_user['User']['id'])
+			));
 		$this->set('diary_posts', $this->paginate());
 	}
 

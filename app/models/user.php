@@ -80,6 +80,7 @@ class User extends AppModel {
 			'className' => 'Group',
 			'tableName' => 'groups',
 			'foreignKey' => 'user_id',
+			'with'=>'GroupMembership',
 			'associationForeignKey' => 'group_id',
 				'joinTable' => 'group_memberships',
 				'unique' => true,
