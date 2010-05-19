@@ -1,7 +1,7 @@
 <?php
 class User extends AppModel {
 	var $name = 'User';
-	var $displayField = 'name';
+	var $displayField = 'username';
 	var $validate = array(
 		'name' => array(
 			'notempty' => array(
@@ -79,8 +79,8 @@ class User extends AppModel {
 		'Group' => array(
 			'className' => 'Group',
 			'tableName' => 'groups',
-			'foreignKey' => 'user_id',
 			'with'=>'GroupMembership',
+			'foreignKey' => 'user_id',
 			'associationForeignKey' => 'group_id',
 				'joinTable' => 'group_memberships',
 				'unique' => true,

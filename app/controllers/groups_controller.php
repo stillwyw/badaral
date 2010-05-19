@@ -2,14 +2,21 @@
 class GroupsController extends AppController {
 
 	var $name = 'Groups';
-	var $uses = array('GroupPost','Group','User','GroupMembership');
+	var $uses = array('GroupPost','GroupsUser','Group','User','GroupMembership');
 	var $components = array('Session');
 
 
 	function index() {
 		//$this->Group->recursive = 0;
-
 		$userId = $this->current_user['User']['id'];
+
+		$groups_joind = $this->User->GroupMembership->Group->find('all',array(
+			'recursive'=>3,
+			'conditions'=>array('User.id '=>$userId),
+			'limit'=>10,
+			'order'=>'GroupMembership.created'									
+			));
+
 		$group_ids = $this->User->GroupMembership->find('list',array(
 			'fields'=>array('GroupMembership.group_id','GroupMembership.group_id'),
 			'conditions'=>array('GroupMembership.user_id'=>$userId)
@@ -17,7 +24,7 @@ class GroupsController extends AppController {
 		$posts = $this->User->GroupMembership->Group->GroupPost->find('all',array(
 																																	'conditions'=>array('Group.id'=>$group_ids),
 																																	'limit'=>20,
-																																	'order'=>array('GroupPost.id','desc')
+																																	'order'=>array('GroupPost.idd','desc')
 																																	));
 
 

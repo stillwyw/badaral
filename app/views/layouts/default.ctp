@@ -17,7 +17,7 @@ show up on all of your views, include it here -->
     	<?php echo $html->link('首页', '/') ?> 
     	<?php echo $html->link('关于', '/about') ?>	 
     	<?php echo $html->link('我的', '/mine') ?>
-    	
+    	<?php echo $html->link('小组', '/groups') ?>
     </div>
     <p>
     	<?php echo $session->flash('auth') ?><p>

@@ -2,10 +2,24 @@
 class DiaryPostsController extends AppController {
 
 	var $name = 'DiaryPosts';
+	var $components = array('Session');
+	
+	function beforeFilter()		
+	{
+		parent::beforeFilter();
+		
+	/*	if(!$this->current_user || $this->DiaryPost->findByUserId){
+			$this->redirect_to('/login');
+		}*/
+	}
 
 	function index() {
-		$this->DiaryPost->recursive = 0;
-		$this->set('diaryPosts', $this->paginate());
+		$this->paginate = array(
+			'conditions'=>array('DiaryPost.user_id'=>$this->currentUserId),
+			'limit'=>2
+			);
+		//$this->DiaryPost->findByUserId($this->currentUserId);
+		$this->set('diaryPosts', $this->paginate('DiaryPost'));
 	}
 
 	function view($id = null) {
@@ -18,7 +32,9 @@ class DiaryPostsController extends AppController {
 
 	function add() {
 		if (!empty($this->data)) {
-			$this->DiaryPost->create();
+			$this->data['DiaryPost']['user_id'] = $this->currentUserId;
+			$userDiary = $this->Diary->findByUserId($this->currentUserId);
+			$this->data['DiaryPost']['diary_id'] = $userDiary['Diary']['id'];
 			if ($this->DiaryPost->save($this->data)) {
 				$this->Session->setFlash(__('The diary post has been saved', true));
 				$this->redirect(array('action' => 'index'));

@@ -19,6 +19,7 @@ class AppController extends Controller {
 		
 		if($this->Auth->user()){
 			$this->current_user = $this->Auth->user();
+			$this->currentUserId = $this->current_user['User']['id'];
 		}
 
 
