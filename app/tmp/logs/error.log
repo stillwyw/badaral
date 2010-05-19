@@ -102,3 +102,4 @@
 2010-05-19 07:28:12 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1364: Field 'diary_id' doesn't have a default value</span> in [D:\abc\wwwroot\cake\libs\model\datasources\dbo_source.php, line 666]
 2010-05-19 08:36:56 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'conditions' in 'where clause'</span> in [D:\abc\wwwroot\cake\libs\model\datasources\dbo_source.php, line 666]
 2010-05-19 08:36:57 Warning: Warning (2): Invalid argument supplied for foreach() in [D:\abc\wwwroot\app\views\diary_posts\index.ctp, line 16]
+2010-05-19 12:42:47 Warning: Warning (2): Invalid argument supplied for foreach() in [D:\wwwroot\trunk\app\views\diaries\index.ctp, line 15]

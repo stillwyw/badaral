@@ -3,6 +3,7 @@ class DiariesController extends AppController {
 
 	var $name = 'Diaries';
 	var $uses = array('Diary','DiaryPost','User');
+	var $components = array('Session');
 
 	function index() {
 		

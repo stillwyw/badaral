@@ -2,6 +2,7 @@
 class DiaryPostsController extends AppController {
 
 	var $name = 'DiaryPosts';
+	var $uses = array('Diary','User','DiaryPost');
 	var $components = array('Session');
 	
 	function beforeFilter()		
@@ -14,6 +15,9 @@ class DiaryPostsController extends AppController {
 	}
 
 	function index() {
+		if ($this->params[:userid]) {
+			$uesr = $this->User->findBy
+		}
 		$this->paginate = array(
 			'conditions'=>array('DiaryPost.user_id'=>$this->currentUserId),
 			'limit'=>2
@@ -34,6 +38,9 @@ class DiaryPostsController extends AppController {
 		if (!empty($this->data)) {
 			$this->data['DiaryPost']['user_id'] = $this->currentUserId;
 			$userDiary = $this->Diary->findByUserId($this->currentUserId);
+			if(!$userDiary){
+				$userDiary = 1;
+			}
 			$this->data['DiaryPost']['diary_id'] = $userDiary['Diary']['id'];
 			if ($this->DiaryPost->save($this->data)) {
 				$this->Session->setFlash(__('The diary post has been saved', true));

@@ -184,3 +184,7 @@
 2010-05-19 08:38:55 Debug: Notice (8): Undefined property: DiaryPost::$findByUserId in [D:\abc\wwwroot\app\controllers\diary_posts_controller.php, line 11]
 2010-05-19 08:40:31 Debug: Notice (8): Undefined property: DiaryPost::$findByUserId in [D:\abc\wwwroot\app\controllers\diary_posts_controller.php, line 11]
 2010-05-19 08:41:11 Debug: Notice (8): Undefined property: DiaryPost::$findByUserId in [D:\abc\wwwroot\app\controllers\diary_posts_controller.php, line 11]
+2010-05-19 12:37:46 Debug: Notice (8): Undefined property: DiaryPostsController::$Diary in [D:\wwwroot\trunk\app\controllers\diary_posts_controller.php, line 36]
+2010-05-19 12:39:19 Debug: Notice (8): Undefined property: DiaryPostsController::$DiaryPost in [D:\wwwroot\trunk\app\controllers\diary_posts_controller.php, line 39]
+2010-05-19 12:42:13 Debug: Notice (8): Undefined property: DiariesController::$Session in [D:\wwwroot\trunk\app\controllers\diaries_controller.php, line 27]
+2010-05-19 12:42:47 Debug: Notice (8): Undefined variable: diaries in [D:\wwwroot\trunk\app\views\diaries\index.ctp, line 15]
