@@ -1,6 +1,7 @@
 <?php
 class AppController extends Controller {
 	var $components = array('Auth');
+	var $uses = array('User');
 	
 	function beforeFilter()
 	{
@@ -20,6 +21,21 @@ class AppController extends Controller {
 		if($this->Auth->user()){
 			$this->current_user = $this->Auth->user();
 			$this->currentUserId = $this->current_user['User']['id'];
+			$this->set('cuid',$this->currentUserId);
+			$this->set('current_user',$this->current_user);
+
+		}
+	
+		if(isset($this->params['userid'])){
+			$user = $this->User->findById($this->params['userid']);
+			if(empty($user)){
+				$user = $this->User->findByUid($this->params['userid']);
+				
+			}
+			$this->user = $user;
+			if($this->user){
+				$this->userid = $this->user['User']['id'];
+			}
 		}
 
 

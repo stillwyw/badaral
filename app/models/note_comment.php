@@ -1,11 +1,11 @@
 <?php
-class Note extends AppModel {
-	var $name = 'Note';
-	var $displayField = 'title';
+class NoteComment extends AppModel {
+	var $name = 'NoteComment';
+	var $displayField = 'body';
 	var $validate = array(
-		'title' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
+		'user_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -13,9 +13,9 @@ class Note extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'user_id' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
+		'note_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -33,10 +33,14 @@ class Note extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'Note' => array(
+			'className' => 'Note',
+			'foreignKey' => 'note_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
-	);
-	var	$hasMany = array(
-		'NoteComment'
 	);
 }
 ?>
