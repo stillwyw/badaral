@@ -110,3 +110,7 @@
 2010-05-22 14:34:04 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'findAll' at line 1</span> in [D:\wwwroot\trunk\cake\libs\model\datasources\dbo_source.php, line 666]
 2010-05-22 14:34:04 Warning: Warning (2): Invalid argument supplied for foreach() in [D:\wwwroot\trunk\app\views\notes\view.ctp, line 45]
 2010-05-22 14:35:00 Warning: Warning (2): Invalid argument supplied for foreach() in [D:\wwwroot\trunk\app\views\notes\view.ctp, line 45]
+2010-05-23 14:37:03 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'User.id' in 'where clause'</span> in [D:\wwwroot\trunk\cake\libs\model\datasources\dbo_source.php, line 666]
+2010-05-23 14:37:03 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'GroupPost.idd' in 'order clause'</span> in [D:\wwwroot\trunk\cake\libs\model\datasources\dbo_source.php, line 666]
+2010-05-23 14:37:04 Warning: Warning (2): Invalid argument supplied for foreach() in [D:\wwwroot\trunk\app\views\groups\index.ctp, line 13]
+2010-05-23 14:41:42 Warning: Warning (512): <span style="color:Red;text-align:left"><b>SQL Error:</b> 1054: Unknown column 'User.id' in 'where clause'</span> in [D:\wwwroot\trunk\cake\libs\model\datasources\dbo_source.php, line 666]

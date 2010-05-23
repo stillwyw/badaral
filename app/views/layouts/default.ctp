@@ -18,7 +18,7 @@ show up on all of your views, include it here -->
     	<?php echo $html->link('关于', '/about') ?>	 
     	<?php echo $html->link('我的', '/mine') ?>
     	<?php echo $html->link('小组', '/groups') ?>
-    	<?php echo $html->link($current_user['User']['username'], '/settings') ?>
+    	<?php if(isset($current_user)){echo $html->link($current_user['User']['username'], '/settings'); } ?>
     </div>
     <p>
     	<?php echo $session->flash('auth') ?><p>

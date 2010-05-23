@@ -2,7 +2,7 @@
 class GroupsController extends AppController {
 
 	var $name = 'Groups';
-	var $uses = array('GroupPost','GroupsUser','Group','User','GroupMembership');
+	var $uses = array('GroupPost','Group','User','GroupMembership');
 	var $components = array('Session');
 
 
@@ -22,10 +22,10 @@ class GroupsController extends AppController {
 			'conditions'=>array('GroupMembership.user_id'=>$userId)
 			));
 		$posts = $this->User->GroupMembership->Group->GroupPost->find('all',array(
-																																	'conditions'=>array('Group.id'=>$group_ids),
-																																	'limit'=>20,
-																																	'order'=>array('GroupPost.idd','desc')
-																																	));
+																														'conditions'=>array('Group.id'=>$group_ids),
+																														'limit'=>20,
+																														'order'=>array('GroupPost.id','desc')
+																														));
 
 
 		$this->set('posts',$posts);

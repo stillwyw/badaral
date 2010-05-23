@@ -76,7 +76,7 @@
 <div class="noteComments form">
 <?php echo $this->Form->create('NoteComment',array('url'=>'/note_comments/add'));?>
 	<fieldset>
- 		<legend><?php __('Add Note Comment'); ?></legend>
+ 		<legend><?php __('Add New Comment'); ?></legend>
 	<?php
 		echo $this->Form->input('body');
 		echo $this->Form->hidden('user_id',array('value'=>$cuid));
