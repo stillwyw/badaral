@@ -5,7 +5,7 @@
 
 <div class="posts index">
 
-	<h2><?php __('我的小组');?></h2>
+	<h2><?php __('小组最近更新');?></h2>
 
 	<table cellpadding="0" cellspacing="0">
 	<?php
@@ -35,6 +35,13 @@
 	</tr>
 <?php endforeach; ?>
 	</table>
+</div>
+<div id="name">
+	<h2><?php __('我加入的小组') ?></h2>
+	<?php foreach ($groups as $group): ?>
+		<?php echo $html->link($group['Group']['name'], '/groups/view/'+$group['Group']['id']) ?>
+	<?php endforeach ?>
+</div>
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>

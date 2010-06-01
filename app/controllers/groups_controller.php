@@ -9,14 +9,16 @@ class GroupsController extends AppController {
 	function index() {
 		//$this->Group->recursive = 0;
 		$userId = $this->current_user['User']['id'];
-
+/*
 		$groups_joind = $this->User->GroupMembership->Group->find('all',array(
 			'recursive'=>3,
 			'conditions'=>array('User.id '=>$userId),
 			'limit'=>10,
 			'order'=>'GroupMembership.created'									
 			));
-
+*/
+/*   
+	//this is a useable code but little bit un-efficient ....
 		$group_ids = $this->User->GroupMembership->find('list',array(
 			'fields'=>array('GroupMembership.group_id','GroupMembership.group_id'),
 			'conditions'=>array('GroupMembership.user_id'=>$userId)
@@ -26,9 +28,18 @@ class GroupsController extends AppController {
 																														'limit'=>20,
 																														'order'=>array('GroupPost.id','desc')
 																														));
-
+*/
+		$posts = $this->GroupPost->query("SELECT * FROM `group_posts` as `GroupPost`
+													join groups as `Group` on `Group`.id = `GroupPost`.group_id
+													join group_memberships as `GroupMembership` on `GroupMembership`.group_id = `Group`.id
+													join users as `User` on `User`.id = `GroupMembership`.user_id
+													where `User`.id = ? order by `GroupPost`.id desc limit 20 ",array($userId));
+		$groups_joined = $this->Group->query("SELECT * FROM `groups` as `Group` 
+					JOIN group_memberships as `GroupMembership` on `GroupMembership`.group_id = `Group`.id
+					where `GroupMembership`.user_id = ?	and `GroupMembership`.role = ? ", array($userId, GroupMembership::member));
 
 		$this->set('posts',$posts);
+		$this->set('groups',$groups_joined);
 	}
 
 	function view($id = null) {
