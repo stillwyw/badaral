@@ -17,6 +17,9 @@ show up on all of your views, include it here -->
     	<?php echo $html->link('首页', '/') ?> 
     	<?php echo $html->link('关于', '/about') ?>	 
     	<?php echo $html->link('我的', '/mine') ?>
+    	<?php if(isset($current_user)){
+					  echo $html->link('日记', "/people/{$current_user['User']['uid']}/diary");
+    	} ?>
     	<?php echo $html->link('小组', '/groups') ?>
     	<?php if(isset($current_user)){
     		echo $html->link($current_user['User']['username'], '/settings'); 

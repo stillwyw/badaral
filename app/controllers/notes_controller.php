@@ -5,12 +5,14 @@ class NotesController extends AppController {
 	var $uses = array('User','Note','NoteComment');
 	var $components = array('Session');
 	var $helpers = array('NoteLink');
-
+	var $paginate=array(
+		'limit'=>5
+		);
 	function index() {
 		if(isset($this->userid)){
-			$this->Note->findbyUserId($this->userid);
+		$datas = $this->paginate('Note',array('user_id'=>$this->userid));
 		}
-		$this->set('notes', $this->paginate());
+		$this->set('notes', $datas);
 	}
 
 	function view($id = null) {

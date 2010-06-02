@@ -103,7 +103,7 @@ class User extends AppModel {
 
 // virtual fields 
 var $virtualFields = array(
-    'uid_or_id' => "User.uid || User.id"
+  //  'uid_or_id' => "User.uid || User.id"
 );
 
 

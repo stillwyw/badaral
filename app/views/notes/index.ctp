@@ -2,7 +2,6 @@
 	<h2><?php __('Notes');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('title');?></th>
 			<th><?php echo $this->Paginator->sort('body');?></th>
 			<th><?php echo $this->Paginator->sort('user_id');?></th>
@@ -20,7 +19,6 @@
 		}
 	?>
 	<tr<?php echo $class;?>>
-		<td><?php echo $note['Note']['id']; ?>&nbsp;</td>
 		<td><?php echo $note['Note']['title']; ?>&nbsp;</td>
 		<td><?php echo $note['Note']['body']; ?>&nbsp;</td>
 		<td>
@@ -45,10 +43,10 @@
 	?>	</p>
 
 	<div class="paging">
-		<?php echo $this->Paginator->prev('<< ' . __('previous', true), array(), null, array('class'=>'disabled'));?>
+		<?php echo $this->Paginator->prev('<< ' . __('previous', true), array("/people/{$current_user['User']['uid']}/diary"), null, array('class'=>'disabled'));?>
 	 | 	<?php echo $this->Paginator->numbers();?>
  |
-		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
+		<?php echo $this->Paginator->next(__('next', true) . ' >>', array("/people/{$current_user['User']['uid']}/diary"), null, array('class' => 'disabled'));?>
 	</div>
 </div>
 <div class="actions">

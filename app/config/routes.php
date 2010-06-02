@@ -28,7 +28,7 @@
 	Router::connect('/about', array('controller'=>'site', 'action'=>'about'));
 	Router::connect('/mine', array('controller'=>'users', 'action'=>'show'));
 	Router::connect('/people/:userid',array('controller'=>'users','action'=>'view'));
-	Router::connect('/people/:userid/notes', array('controller'=>'notes','action'=>'index'));
+	Router::connect('/people/:userid/diary', array('controller'=>'notes','action'=>'index'));
  
  
  
