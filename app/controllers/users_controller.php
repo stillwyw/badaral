@@ -20,8 +20,8 @@ class UsersController extends AppController {
  			if ($this->data['User']['password'] == $this->Auth->password($this->data['User']['password_confirm'])) {
 	 			$this->User->create();
  				if($this->User->save($this->data)){
+ 					$this->User->saveField('uid',"u{$this->User->id}");
 	 				if($this->Auth->login($this->data)){
-                                 
 						$this->redirect("home"); 					
 	 				}else{
                                      	}
@@ -29,8 +29,7 @@ class UsersController extends AppController {
                     $this->data['User']['password']='';
                     $this->data['User']['password_confirm']='';
                     $this->Session->setFlash('something wrong!');
-
-                                }
+				}
  			}
  		}
  	}
@@ -77,15 +76,14 @@ class UsersController extends AppController {
 		
 		
 		
-		
 	}
 	
-	function view($id = null) {
-		if (!$id) {
+	function view() {
+		if (!isset($this->params['userid'])) {
 			$this->Session->setFlash(__('Invalid user', true));
-			$this->redirect(array('action' => 'index'));
+			$this->redirect('/');
 		}
-		$this->set('user', $this->User->read(null, $id));
+		$this->set('user', $this->user);
 	}
 
 	function add() {

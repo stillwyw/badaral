@@ -31,9 +31,10 @@ class AppController extends Controller {
 	
 		if(isset($this->params['userid'])){
 			$user = $this->User->findById($this->params['userid']);
+			$user['User']['uid_or_id']=$user['User']['uid'];
 			if(empty($user)){
 				$user = $this->User->findByUid($this->params['userid']);
-				
+				$user['User']['uid_or_id']=$user['User']['id'];
 			}
 			$this->user = $user;
 			if($this->user){

@@ -5,10 +5,7 @@
 	<?php
 		echo $this->Form->input('name');
 		echo $this->Form->input('desc');
-		echo $this->Form->input('user_id');
-		echo $this->Form->input('modifed');
-		echo $this->Form->input('status');
-		echo $this->Form->input('privacy');
+
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>

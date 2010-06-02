@@ -37,9 +37,12 @@ class GroupsController extends AppController {
 		$groups_joined = $this->Group->query("SELECT * FROM `groups` as `Group` 
 					JOIN group_memberships as `GroupMembership` on `GroupMembership`.group_id = `Group`.id
 					where `GroupMembership`.user_id = ?	and `GroupMembership`.role = ? ", array($userId, GroupMembership::member));
-
+		$groups_admined = $this->Group->query("SELECT * FROM `groups` as `Group` 
+					JOIN group_memberships as `GroupMembership` on `GroupMembership`.group_id = `Group`.id
+					where `GroupMembership`.user_id = ?	and `GroupMembership`.role = ? ", array($userId, GroupMembership::admin));
 		$this->set('posts',$posts);
-		$this->set('groups',$groups_joined);
+		$this->set('groups_joined',$groups_joined);
+		$this->set('groups_admined',$groups_admined);
 	}
 
 	function view($id = null) {
@@ -47,13 +50,32 @@ class GroupsController extends AppController {
 			$this->Session->setFlash(__('Invalid group', true));
 			$this->redirect(array('action' => 'index'));
 		}
+		$creatorId = $this->GroupMembership->find('first',array(
+				'conditions'=>array("GroupMembership.group_id "=> $id,"GroupMembership.role"=>GroupMembership::admin)
+			));
+		$creatorId = $creatorId['GroupMembership']['user_id'];
+		$creator=$this->User->findById($creatorId);
+		$meberIds = $this->GroupMembership->find('all',array(
+				'conditions'=>array("GroupMembership.group_id "=> $id,"GroupMembership.role"=>GroupMembership::member)
+			));
+		$members = $this->User->find('all',array('condtions'=>array('User.id'=>$memberIds)));
+		$posts = $this->GroupPost->findAllByGroupId($id);
 		$this->set('group', $this->Group->read(null, $id));
+		$this->set('posts',$posts);
 	}
 
 	function add() {
 		if (!empty($this->data)) {
 			$this->Group->create();
 			if ($this->Group->save($this->data)) {
+				$this->Group->saveField('gid',$this->Group->id);
+				$this->GroupMembership->create();
+				$_data = array(
+						'user_id'=>$this->currentUserId,
+						'group_id'=>$this->Group->id,
+						'role'=>GroupMembership::admin
+					);
+				$this->GroupMembership->save($_data);
 				$this->Session->setFlash(__('The group has been saved', true));
 				$this->redirect(array('action' => 'index'));
 			} else {

@@ -32,6 +32,9 @@ class User extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+			'isUnique' => array(
+				'rule'=> array('isUnique')	
+			)			
 		),
 		'uid' => array(
 			'notempty' => array(
@@ -42,6 +45,9 @@ class User extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+			'isUnique' => array(
+				'rule'=> array('isUnique')	
+			)
 		),
 	);
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -72,6 +78,11 @@ class User extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
+		),
+		'GroupMembership' => array(
+			'className' => 'GroupMembership',
+			'foreignKey' => 'user_id',
+			'dependent' => false
 		)
 	);
 	
@@ -90,6 +101,10 @@ class User extends AppModel {
 		)
 	);
 
+// virtual fields 
+var $virtualFields = array(
+    'uid_or_id' => "User.uid || User.id"
+);
 
 
 }

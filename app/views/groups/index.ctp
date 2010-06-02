@@ -19,14 +19,11 @@
 	<tr<?php echo $class;?>>
 		<td><?php echo $post['GroupPost']['id']; ?>&nbsp;</td>
 		<td><?php echo $post['GroupPost']['title']; ?>&nbsp;</td>
-		<td><?php echo $post['GroupPost']['body']; ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($post['User']['username'], array('controller' => 'users', 'action' => 'view', $post['User']['id'])); ?>
+			<?php echo $this->Html->link($post['User']['username'], array('controller' => 'users', 'action' => 'view', $post['User']['uid'])); ?>
 		</td>
 		<td><?php echo $post['GroupPost']['created']; ?>&nbsp;</td>
 		<td><?php echo $post['GroupPost']['updated']; ?>&nbsp;</td>
-		<td><?php echo $post['GroupPost']['status']; ?>&nbsp;</td>
-		<td><?php echo $post['GroupPost']['privacy']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $post['GroupPost']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $post['GroupPost']['id'])); ?>
@@ -37,18 +34,21 @@
 	</table>
 </div>
 <div id="name">
-	<h2><?php __('我加入的小组') ?></h2>
-	<?php foreach ($groups as $group): ?>
-		<?php echo $html->link($group['Group']['name'], '/groups/view/'+$group['Group']['id']) ?>
+	<h2><?php __('我管理的小组dd') ?></h2>
+	<?php foreach ($groups_admined as $group): ?>
+		<?php echo $html->link($group['Group']['name'], array('controller'=>'groups','action'=>'view',$group['Group']['id'])) ?>
+	<?php endforeach ?>
+</div>
+<div id="name">
+	<h2><?php __('我加入的小组dd') ?></h2>
+	<?php foreach ($groups_joined as $group): ?>
+		<?php echo $html->link($group['Group']['name'], array('controller'=>'groups','action'=>'view',$group['Group']['id'])) ?>
 	<?php endforeach ?>
 </div>
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New post', true), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Users', true), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User', true), array('controller' => 'users', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List post Posts', true), array('controller' => 'post_posts', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New post Post', true), array('controller' => 'post_posts', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('创建小组', true), array('controller' => 'groups', 'action' => 'add')); ?> </li>
+
 	</ul>
 </div>
