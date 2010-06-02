@@ -4,6 +4,17 @@ class GroupsController extends AppController {
 	var $name = 'Groups';
 	var $uses = array('GroupPost','Group','User','GroupMembership');
 	var $components = array('Session');
+	var $current_group=null;
+	var $current_group_id = null;
+	function beforeFilter()
+	{
+		parent::beforeFilter();
+		if(isset($this->params['gid'])){
+			$group = $this->Group->findByGid($this->params['gid']);
+			$this->current_group = $group;
+			$this->current_group_id = $group['Group']['id'];
+		}
+	}
 
 
 	function index() {
@@ -45,8 +56,8 @@ class GroupsController extends AppController {
 		$this->set('groups_admined',$groups_admined);
 	}
 
-	function view($id = null) {
-		if (!$id) {
+	function view($gid = null) {
+		if (!$gid) {
 			$this->Session->setFlash(__('Invalid group', true));
 			$this->redirect(array('action' => 'index'));
 		}
@@ -55,12 +66,12 @@ class GroupsController extends AppController {
 			));
 		$creatorId = $creatorId['GroupMembership']['user_id'];
 		$creator=$this->User->findById($creatorId);
-		$meberIds = $this->GroupMembership->find('all',array(
-				'conditions'=>array("GroupMembership.group_id "=> $id,"GroupMembership.role"=>GroupMembership::member)
+		$memberIds = $this->GroupMembership->find('all',array(
+				'conditions'=>array("GroupMembership.group_id "=> $this->current_group_id,"GroupMembership.role"=>GroupMembership::member)
 			));
 		$members = $this->User->find('all',array('condtions'=>array('User.id'=>$memberIds)));
 		$posts = $this->GroupPost->findAllByGroupId($id);
-		$this->set('group', $this->Group->read(null, $id));
+		$this->set('group', $this->current_group);
 		$this->set('posts',$posts);
 	}
 
@@ -68,16 +79,20 @@ class GroupsController extends AppController {
 		if (!empty($this->data)) {
 			$this->Group->create();
 			if ($this->Group->save($this->data)) {
-				$this->Group->saveField('gid',$this->Group->id);
+				$groupId = $this->Group->id;
+				$this->Group->saveField('gid',"g{$groupId}");
+				$gid = "g{$groupId}";
 				$this->GroupMembership->create();
 				$_data = array(
+					'GtoupMembership'=>
+						array(
 						'user_id'=>$this->currentUserId,
-						'group_id'=>$this->Group->id,
+						'group_id'=>$groupId,
 						'role'=>GroupMembership::admin
-					);
+					));
 				$this->GroupMembership->save($_data);
 				$this->Session->setFlash(__('The group has been saved', true));
-				$this->redirect(array('action' => 'index'));
+				$this->redirect("/group/{$gid}");
 			} else {
 				$this->Session->setFlash(__('The group could not be saved. Please, try again.', true));
 			}

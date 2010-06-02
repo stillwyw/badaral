@@ -27,6 +27,8 @@
 	Router::connect('/signout',array('controller'=>'users','action'=>'logout'));
 	Router::connect('/about', array('controller'=>'site', 'action'=>'about'));
 	Router::connect('/mine', array('controller'=>'users', 'action'=>'show'));
+	Router::connect('/group',array('controller'=>'groups','action'=>'index'));
+	Router::connect('/group/:gid',array('controller'=>'groups','action'=>'view'));
 	Router::connect('/people/:userid',array('controller'=>'users','action'=>'view'));
 	Router::connect('/people/:userid/diary', array('controller'=>'notes','action'=>'index'));
  

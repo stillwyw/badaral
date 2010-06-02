@@ -36,13 +36,13 @@
 <div id="name">
 	<h2><?php __('我管理的小组dd') ?></h2>
 	<?php foreach ($groups_admined as $group): ?>
-		<?php echo $html->link($group['Group']['name'], array('controller'=>'groups','action'=>'view',$group['Group']['id'])) ?>
+		<?php echo $html->link($group['Group']['name'], array('controller'=>'groups','action'=>'view',$group['Group']['gid'])) ?>
 	<?php endforeach ?>
 </div>
 <div id="name">
 	<h2><?php __('我加入的小组dd') ?></h2>
 	<?php foreach ($groups_joined as $group): ?>
-		<?php echo $html->link($group['Group']['name'], array('controller'=>'groups','action'=>'view',$group['Group']['id'])) ?>
+		<?php echo $html->link($group['Group']['name'], array('controller'=>'groups','action'=>'view',$group['Group']['gid'])) ?>
 	<?php endforeach ?>
 </div>
 <div class="actions">
