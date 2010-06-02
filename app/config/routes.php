@@ -24,6 +24,7 @@
 	Router::connect('/',array('controller' => 'site', 'action' => 'index'));
 	Router::connect('/signup', array('controller'=>'users', 'action'=>'signup'));
 	Router::connect('/signin' , array('controller'=>'users','action'=>'login'));
+	Router::connect('/signout',array('controller'=>'users','action'=>'logout'));
 	Router::connect('/about', array('controller'=>'site', 'action'=>'about'));
 	Router::connect('/mine', array('controller'=>'users', 'action'=>'show'));
  

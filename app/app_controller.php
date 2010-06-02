@@ -18,6 +18,9 @@ class AppController extends Controller {
 		
 		$this->Auth->authorize = 'controller';
 		
+		$this->Auth->autoRedirect = false;
+
+		
 		if($this->Auth->user()){
 			$this->current_user = $this->Auth->user();
 			$this->currentUserId = $this->current_user['User']['id'];

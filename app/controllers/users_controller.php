@@ -2,7 +2,7 @@
 class UsersController extends AppController {
 
 	var $name = 'Users';
-	var $components = array('Session');
+	var $components = array('Session','Cookie');
 	
 	function beforeFilter(){
 		$this->Auth->allow('login','logout','signup');
@@ -37,11 +37,26 @@ class UsersController extends AppController {
  	
 	function login()
 	{
-	
-		if($this->data){
-			$this->Auth->login($this->data);
+		if ($this->Auth->user()) {
+			if (!empty($this->data['User']['remember_me'])) {
+				$cookie = array();
+				$cookie['username'] = $this->data['User']['username'];
+				$cookie['password'] = $this->data['User']['password'];
+				$this->Cookie->write('Auth.User', $cookie, true, '+2 weeks');
+				unset($this->data['User']['remember_me']);
+			}
+			$this->redirect($this->Auth->redirect());
 		}
-		
+		if (empty($this->data)) {
+			$cookie = $this->Cookie->read('Auth.User');
+			if (!is_null($cookie)) {
+				if ($this->Auth->login($cookie)) {
+					//  Clear auth message, just in case we use it.
+					$this->Session->delete('Message.auth');
+					$this->redirect($this->Auth->redirect());
+				}
+			}
+		}
 	}
 	
 	
