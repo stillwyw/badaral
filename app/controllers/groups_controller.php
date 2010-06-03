@@ -15,7 +15,9 @@ class GroupsController extends AppController {
 			$this->current_group_id = $group['Group']['id'];
 		}
 	}
-
+	var $paginate=array(
+			'limit'=>20
+			);
 
 	function index() {
 		//$this->Group->recursive = 0;
@@ -57,22 +59,24 @@ class GroupsController extends AppController {
 	}
 
 	function view($gid = null) {
-		if (!$gid) {
+		$group = $this->current_group;
+		$group_id = $this->current_group_id;
+		if (!isset($group)&&!$group) {
 			$this->Session->setFlash(__('Invalid group', true));
 			$this->redirect(array('action' => 'index'));
 		}
 		$creatorId = $this->GroupMembership->find('first',array(
-				'conditions'=>array("GroupMembership.group_id "=> $id,"GroupMembership.role"=>GroupMembership::admin)
+				'conditions'=>array("GroupMembership.group_id "=> $group_id,"GroupMembership.role"=>GroupMembership::admin)
 			));
 		$creatorId = $creatorId['GroupMembership']['user_id'];
 		$creator=$this->User->findById($creatorId);
-		$memberIds = $this->GroupMembership->find('all',array(
-				'conditions'=>array("GroupMembership.group_id "=> $this->current_group_id,"GroupMembership.role"=>GroupMembership::member)
-			));
-		$members = $this->User->find('all',array('condtions'=>array('User.id'=>$memberIds)));
-		$posts = $this->GroupPost->findAllByGroupId($id);
+		$memberShips = $this->GroupMembership->find('list',array('fields'=>'GroupMembership.user_id',
+				'conditions'=>array("GroupMembership.group_id"=>$this->current_group_id, "GroupMembership.role <>"=>GroupMembership::blocked)
+				));
+		$members = $this->User->find('all',array('conditions'=>array('User.id '=>$memberShips),'limit'=>10,'order'=>'id desc'));
+		$this->set('members',$members);
 		$this->set('group', $this->current_group);
-		$this->set('posts',$posts);
+		$this->set('posts',$this->paginate('GroupPost',array("GroupPost.group_id "=>$group_id)));
 	}
 
 	function add() {

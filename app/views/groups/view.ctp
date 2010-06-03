@@ -27,6 +27,12 @@
 		</dd>
 	</dl>
 </div>
+<div id="members">
+	<h3>小组成员</h3>
+	<?php foreach ($members as $member): ?>
+		<?php echo $html->link($member['User']['username'], "/people/{$member['User']['uid']}") ?>
+	<?php endforeach ?>
+</div>
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>

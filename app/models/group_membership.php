@@ -5,6 +5,7 @@ class GroupMembership extends AppModel {
 	const admin = 2;
 	const manager = 1;
 	const member = 0;
+	const blocked = 3;
 	
 	var $belongsTo =array(
 		'User' => array(
