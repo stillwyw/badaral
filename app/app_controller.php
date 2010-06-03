@@ -23,8 +23,8 @@ class AppController extends Controller {
 		
 		if($this->Auth->user()){
 			$this->current_user = $this->Auth->user();
-			$this->currentUserId = $this->current_user['User']['id'];
-			$this->set('cuid',$this->currentUserId);
+			$this->current_user_id = $this->current_user['User']['id'];
+			$this->set('cuid',$this->current_user_id);
 			$this->set('current_user',$this->current_user);
 
 		}
@@ -40,7 +40,11 @@ class AppController extends Controller {
 			}
 		}
 
-
+		if(isset($this->params['gid'])){
+			$group = $this->Group->findByGid($this->params['gid']);
+			$this->current_group = $group;
+			$this->current_group_id = $group['Group']['id'];
+		}
 	}
 	
 	function isAuthorized() {

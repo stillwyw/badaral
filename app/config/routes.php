@@ -29,6 +29,7 @@
 	Router::connect('/mine', array('controller'=>'users', 'action'=>'show'));
 	Router::connect('/group',array('controller'=>'groups','action'=>'index'));
 	Router::connect('/group/:gid',array('controller'=>'groups','action'=>'view'));
+	Router::connect('/group/:gid/post/new',array('controller'=>'group_posts','action'=>'add'));
 	Router::connect('/people/:userid',array('controller'=>'users','action'=>'view'));
 	Router::connect('/people/:userid/diary', array('controller'=>'notes','action'=>'index'));
  

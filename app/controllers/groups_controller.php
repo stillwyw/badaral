@@ -6,15 +6,7 @@ class GroupsController extends AppController {
 	var $components = array('Session');
 	var $current_group=null;
 	var $current_group_id = null;
-	function beforeFilter()
-	{
-		parent::beforeFilter();
-		if(isset($this->params['gid'])){
-			$group = $this->Group->findByGid($this->params['gid']);
-			$this->current_group = $group;
-			$this->current_group_id = $group['Group']['id'];
-		}
-	}
+
 	var $paginate=array(
 			'limit'=>20
 			);
@@ -90,7 +82,7 @@ class GroupsController extends AppController {
 				$_data = array(
 					'GtoupMembership'=>
 						array(
-						'user_id'=>$this->currentUserId,
+						'user_id'=>$this->current_user_id,
 						'group_id'=>$groupId,
 						'role'=>GroupMembership::admin
 					));

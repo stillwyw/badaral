@@ -17,9 +17,14 @@ class GroupPostsController extends AppController {
 	}
 
 	function add() {
-		if (!empty($this->data)) {
+		$group=$this->current_group;
+		$group_id = $this->current_group_id;
+		
+		if (!empty($group)) {
 			$this->GroupPost->create();
 			if ($this->GroupPost->save($this->data)) {
+				$this->GroupPost->saveField('group_id',$group_id);
+				$this->GroupPost->saveField('user_id',$this->current_user_id);
 				$this->Session->setFlash(__('The group post has been saved', true));
 				$this->redirect(array('action' => 'index'));
 			} else {
