@@ -2,6 +2,7 @@
 class GroupPostsController extends AppController {
 
 	var $name = 'GroupPosts';
+	var $components = array('Session');
 
 	function index() {
 		$this->GroupPost->recursive = 0;
@@ -20,13 +21,13 @@ class GroupPostsController extends AppController {
 		$group=$this->current_group;
 		$group_id = $this->current_group_id;
 		
-		if (!empty($group)) {
+		if (!empty($group)&&!empty($this->data)) {
 			$this->GroupPost->create();
 			if ($this->GroupPost->save($this->data)) {
 				$this->GroupPost->saveField('group_id',$group_id);
 				$this->GroupPost->saveField('user_id',$this->current_user_id);
 				$this->Session->setFlash(__('The group post has been saved', true));
-				$this->redirect(array('action' => 'index'));
+				$this->redirect("/group/{$group['Group']['gid']}");
 			} else {
 				$this->Session->setFlash(__('The group post could not be saved. Please, try again.', true));
 			}

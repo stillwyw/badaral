@@ -26,6 +26,14 @@
 			&nbsp;
 		</dd>
 	</dl>
+	<?php if ($group_role!=null && ($group_role == GroupMembership::member || $group_role == GroupMembership::manager )): ?>
+		我是小组成员 <?php echo $html->link('退出小组', "/group/{$gid}/quit") ?>
+		
+	<?php else: ?>
+			<?php echo $html->link('加入该小组', "/group/{$gid}/join") ?>
+
+	<?php endif ?>
+
 </div>
 <div id="members">
 	<h3>小组成员</h3>
@@ -38,8 +46,8 @@
 	<ul>
 		<li><?php echo $this->Html->link(__('小组管理', true), array('action' => 'edit', $group['Group']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('Delete Group', true), array('action' => 'delete', $group['Group']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $group['Group']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('返回我的小组', true), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('添加新讨论', true), array('controller' => 'group_posts', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('返回我的小组', true), "/group"); ?> </li>
+		<li><?php echo $this->Html->link(__('添加新讨论', true), "/group/{$gid}/post/new"); ?> </li>
 	</ul>
 </div>
 <div class="related">

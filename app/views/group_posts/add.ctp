@@ -1,14 +1,10 @@
 <div class="groupPosts form">
-<?php echo $this->Form->create('GroupPost');?>
+<?php echo $this->Form->create('GroupPost',array('url'=>"/group/{$gid}/post/new"));?>
 	<fieldset>
  		<legend><?php __('Add Group Post'); ?></legend>
 	<?php
 		echo $this->Form->input('title');
 		echo $this->Form->input('body');
-		echo $this->Form->input('status');
-		echo $this->Form->input('privacy');
-		echo $this->Form->input('user_id');
-		echo $this->Form->input('group_id');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>

@@ -1,7 +1,7 @@
 <?php
 class AppController extends Controller {
 	var $components = array('Auth');
-	var $uses = array('User');
+	var $uses = array('User','Group','GroupMembership');
 	
 	function beforeFilter()
 	{
@@ -24,6 +24,7 @@ class AppController extends Controller {
 		if($this->Auth->user()){
 			$this->current_user = $this->Auth->user();
 			$this->current_user_id = $this->current_user['User']['id'];
+			
 			$this->set('cuid',$this->current_user_id);
 			$this->set('current_user',$this->current_user);
 
@@ -44,6 +45,7 @@ class AppController extends Controller {
 			$group = $this->Group->findByGid($this->params['gid']);
 			$this->current_group = $group;
 			$this->current_group_id = $group['Group']['id'];
+			$this->set('gid',$this->params['gid']);
 		}
 	}
 	

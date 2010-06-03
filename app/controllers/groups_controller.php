@@ -4,13 +4,23 @@ class GroupsController extends AppController {
 	var $name = 'Groups';
 	var $uses = array('GroupPost','Group','User','GroupMembership');
 	var $components = array('Session');
-	var $current_group=null;
-	var $current_group_id = null;
-
 	var $paginate=array(
-			'limit'=>20
+			'limit'=>4
 			);
 
+	function beforeFilter()
+	{
+		parent::beforeFilter();
+		if(!empty($this->current_group)&&!empty($this->current_user)){
+			$membership = $this->GroupMembership->find('first',array(
+			'conditions'=>array(
+				'GroupMembership.group_id'=>$this->current_group_id,
+				'GroupMembership.user_id'=>$this->current_user_id				
+				)));
+			$role = $membership['GroupMembership']['role'];
+			$this->set('group_role',$role);
+		}
+	}
 	function index() {
 		//$this->Group->recursive = 0;
 		$userId = $this->current_user['User']['id'];

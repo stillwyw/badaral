@@ -30,6 +30,8 @@
 	Router::connect('/group',array('controller'=>'groups','action'=>'index'));
 	Router::connect('/group/:gid',array('controller'=>'groups','action'=>'view'));
 	Router::connect('/group/:gid/post/new',array('controller'=>'group_posts','action'=>'add'));
+	Router::connect('/group/:gid/join',array('controller'=>'group_memberships','action'=>'join'));
+	Router::connect('/group/:gid/quit',array('controller'=>'group_memberships','action'=>'quit'));
 	Router::connect('/people/:userid',array('controller'=>'users','action'=>'view'));
 	Router::connect('/people/:userid/diary', array('controller'=>'notes','action'=>'index'));
  
