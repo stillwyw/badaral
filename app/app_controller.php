@@ -20,7 +20,7 @@ class AppController extends Controller {
 		
 		$this->Auth->autoRedirect = false;
 
-		
+		// current user
 		if($this->Auth->user()){
 			$this->current_user = $this->Auth->user();
 			$this->current_user_id = $this->current_user['User']['id'];
@@ -28,7 +28,7 @@ class AppController extends Controller {
 			$this->set('current_user',$this->current_user);
 
 		}
-	
+		// user stuffs
 		if(isset($this->params['userid'])){
 			$user = $this->User->findById($this->params['userid']);
 			if(empty($user)){
@@ -39,7 +39,7 @@ class AppController extends Controller {
 				$this->userid = $this->user['User']['id'];
 			}
 		}
-
+		// group stuffs
 		if(isset($this->params['gid'])){
 			$group = $this->Group->findByGid($this->params['gid']);
 			$this->current_group = $group;

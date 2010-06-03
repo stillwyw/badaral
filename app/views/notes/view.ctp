@@ -55,12 +55,8 @@
 		<td>
 			<?php echo $this->Html->link($noteComment['User']['username'], array('controller' => 'users', 'action' => 'view', $noteComment['User']['id'])); ?>
 		</td>
-		<td>
-			<?php echo $this->Html->link($noteComment['Note']['title'], array('controller' => 'notes', 'action' => 'view', $noteComment['Note']['id'])); ?>
-		</td>
+
 		<td class="actions">
-			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $noteComment['NoteComment']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $noteComment['NoteComment']['id'])); ?>
 			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $noteComment['NoteComment']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $noteComment['NoteComment']['id'])); ?>
 		</td>
 	</tr>
