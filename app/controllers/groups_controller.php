@@ -90,7 +90,7 @@ class GroupsController extends AppController {
 				$gid = "g{$groupId}";
 				$this->GroupMembership->create();
 				$_data = array(
-					'GtoupMembership'=>
+					'GroupMembership'=>
 						array(
 						'user_id'=>$this->current_user_id,
 						'group_id'=>$groupId,

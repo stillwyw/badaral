@@ -1,6 +1,6 @@
 <?php
 class AppController extends Controller {
-	var $components = array('Auth');
+	var $components = array('Auth','Cookie');
 	var $uses = array('User','Group','GroupMembership');
 	
 	function beforeFilter()
