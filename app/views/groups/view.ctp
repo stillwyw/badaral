@@ -1,4 +1,5 @@
 <div class="groups view">
+	<link href="http://sjs.sinajs.cn/uc/chatroom/css/chatroom.css" rel="stylesheet" type="text/css" /><script src="http://sjs.sinajs.cn/uc/chatroom/common/base_min.js" charset="UTF-8"></script><script src="http://sjs.sinajs.cn/uc/chatroom/common/chatroom_min.js" charset="UTF-8"></script><script type="text/javascript" charset="UTF-8">var wuc_chatroom = new WUCChatroom({id: 500953, name: '<?php  echo $group['Group']['name']?>', siteApi : ''});</script><script>jQuery.noConflict();</script>
 <h2><?php  __('Group');?></h2>
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
 

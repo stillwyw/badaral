@@ -5,8 +5,16 @@ class UsersController extends AppController {
 	var $components = array('Session','Cookie');
 	
 	function beforeFilter(){
+	//  $this->Cookie->name = 'baker_id';
+	//  $this->Cookie->time =  3600;  // or '1 hour'
+	  $this->Cookie->path = '/'; 
+	//  $this->Cookie->domain = 'example.com';   
+	  $this->Cookie->secure = false;  //i.e. only sent if using secure HTTPS
+	  $this->Cookie->key = 'qSI232qs*&sXOw!';
 		$this->Auth->allow('login','logout','signup');
 		parent::beforeFilter();
+
+
 	}
 
 	function index() {
@@ -39,17 +47,19 @@ class UsersController extends AppController {
 		if ($this->Auth->user()) {
 			if (!empty($this->data['User']['remember_me'])) {
 				$cookie = array();
-				$cookie['username'] = $this->data['User']['username'];
+				$cookie['email'] = $this->data['User']['email'];
 				$cookie['password'] = $this->data['User']['password'];
-				$this->Cookie->write('Auth.User', $cookie, true, '+2 weeks');
+				$this->Cookie->write('Auth.User', $cookie, true, '+4 weeks');
 				unset($this->data['User']['remember_me']);
 			}
 			$this->redirect($this->Auth->redirect());
 		}
 		if (empty($this->data)) {
+			echo 'hrehrehrehrhe';
 			$cookie = $this->Cookie->read('Auth.User');
 			if (!is_null($cookie)) {
-				echo implode(' , ',$cookie);
+				echo 'hrere';
+				echo $cookie['User']['username'];
 				if ($this->Auth->login($cookie)) {						
 						echo "Cookie exists !!!!";
 
