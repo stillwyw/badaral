@@ -55,14 +55,9 @@ class UsersController extends AppController {
 			$this->redirect($this->Auth->redirect());
 		}
 		if (empty($this->data)) {
-			echo 'hrehrehrehrhe';
 			$cookie = $this->Cookie->read('Auth.User');
 			if (!is_null($cookie)) {
-				echo 'hrere';
-				echo $cookie['User']['username'];
 				if ($this->Auth->login($cookie)) {						
-						echo "Cookie exists !!!!";
-
 					//  Clear auth message, just in case we use it.
 					$this->Session->delete('Message.auth');
 					$this->redirect($this->Auth->redirect());
@@ -74,6 +69,7 @@ class UsersController extends AppController {
 	
 	
 	function logout(){
+		$this->Cookie->del('Auth.User');
 		$this->redirect($this->Auth->logout());
 	}
 	

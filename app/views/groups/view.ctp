@@ -1,5 +1,5 @@
 <div class="groups view">
-	<link href="http://sjs.sinajs.cn/uc/chatroom/css/chatroom.css" rel="stylesheet" type="text/css" /><script src="http://sjs.sinajs.cn/uc/chatroom/common/base_min.js" charset="UTF-8"></script><script src="http://sjs.sinajs.cn/uc/chatroom/common/chatroom_min.js" charset="UTF-8"></script><script type="text/javascript" charset="UTF-8">var wuc_chatroom = new WUCChatroom({id: 500953, name: '<?php  echo $group['Group']['name']?>', siteApi : ''});</script><script>jQuery.noConflict();</script>
+	
 <h2><?php  __('Group');?></h2>
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
 
@@ -30,7 +30,9 @@
 	<?php if ($group_role!=null && ($group_role == GroupMembership::member || $group_role == GroupMembership::manager )): ?>
 		我是小组成员 <?php echo $html->link('退出小组', "/group/{$gid}/quit") ?>
 		
-	<?php else: ?>
+	<?php elseif ($group_role !=null && $group_role==GroupMembership::admin): ?>
+		我是小组组长
+		<?php else: ?>
 			<?php echo $html->link('加入该小组', "/group/{$gid}/join") ?>
 
 	<?php endif ?>
@@ -87,3 +89,4 @@
 		</ul>
 	</div>
 </div>
+<link href="http://sjs.sinajs.cn/uc/chatroom/css/chatroom.css" rel="stylesheet" type="text/css" /><script src="http://sjs.sinajs.cn/uc/chatroom/common/base_min.js" charset="UTF-8"></script><script src="http://sjs.sinajs.cn/uc/chatroom/common/chatroom_min.js" charset="UTF-8"></script><script type="text/javascript" charset="UTF-8">var wuc_chatroom = new WUCChatroom({id: 500953, name: '<?php  echo $group['Group']['name']?>', siteApi : ''});</script><script>jQuery.noConflict();</script>

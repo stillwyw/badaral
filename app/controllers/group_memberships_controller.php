@@ -37,7 +37,7 @@ class GroupMembershipsController extends AppController {
 				'GroupMembership.group_id'=>$this->current_group_id,
 				'GroupMmebership.user_id'=>$this->current_user_id				
 				)));
-				if(!$membership_exists){
+				if(is_null($membership_exists)){
 					$group = $this->current_group;
 					$this->GroupMembership->create();
 					$mdata = array(

@@ -81,6 +81,7 @@ class DATABASE_CONFIG {
 		'password' => '',
 		'database' => 'anything',
 		'prefix' => '',
+		'encoding'=>'utf8'
 	);
 /*
 	var $test = array(

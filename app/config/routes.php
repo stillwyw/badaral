@@ -34,6 +34,7 @@
 	Router::connect('/group/:gid/quit',array('controller'=>'group_memberships','action'=>'quit'));
 	Router::connect('/people/:userid',array('controller'=>'users','action'=>'view'));
 	Router::connect('/people/:userid/diary', array('controller'=>'notes','action'=>'index'));
+	Router::connect('/location/:province/:city',array('controller'=>'locations','action'=>'choose'));
  
  
  
