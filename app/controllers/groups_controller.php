@@ -11,15 +11,21 @@ class GroupsController extends AppController {
 	function beforeFilter()
 	{
 		parent::beforeFilter();
-		if(!empty($this->current_group)&&!empty($this->current_user)){
+		if ($this->params['action']!='index') {
+		if((!empty($this->current_group)&&!empty($this->current_user))){
 			$membership = $this->GroupMembership->find('first',array(
 			'conditions'=>array(
 				'GroupMembership.group_id'=>$this->current_group_id,
 				'GroupMembership.user_id'=>$this->current_user_id				
 				)));
-			$role = $membership['GroupMembership']['role'];
-			$this->set('group_role',$role);
+			$this->role = $membership['GroupMembership']['role'];
+			$this->set('group_role',$this->role);
+		}else{
+			$this->Session->setFlash('页面不存在，无权访问。');
+			$this->redirect(array('action'=>'index'));
 		}
+		}
+
 	}
 	function index() {
 		//$this->Group->recursive = 0;
@@ -107,24 +113,25 @@ class GroupsController extends AppController {
 		$this->set(compact('users'));
 	}
 
-	function edit($id = null) {
-		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid group', true));
+	function edit() {
+					echo $this->role;
+
+		if (!isset($this->role)) {
+			$this->Session->setFlash(__('您无权访问该页面。', true));
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
+			$this->Group->id=$this->current_group_id;
 			if ($this->Group->save($this->data)) {
-				$this->Session->setFlash(__('The group has been saved', true));
+				$this->Session->setFlash(__('修改成功。', true));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The group could not be saved. Please, try again.', true));
 			}
 		}
 		if (empty($this->data)) {
-			$this->data = $this->Group->read(null, $id);
+			$this->data = $this->current_group;
 		}
-		$users = $this->Group->User->find('list');
-		$this->set(compact('users'));
 	}
 
 	function delete($id = null) {

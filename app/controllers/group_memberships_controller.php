@@ -13,8 +13,8 @@ class GroupMembershipsController extends AppController {
 				'GroupMembership.group_id'=>$this->current_group_id,
 				'GroupMembership.user_id'=>$this->current_user_id				
 				)));
-			$role = $this->membership['GroupMembership']['role'];
-			$this->set('group_role',$role);
+			$this->role = $this->membership['GroupMembership']['role'];
+			$this->set('group_role',$this->role);
 		}
 	}
 	function index() {
@@ -31,14 +31,7 @@ class GroupMembershipsController extends AppController {
 	}
 
 	function join() {
-		if (!empty($this->current_group)&&!empty($this->current_user)) {
-			$membership_exists = $this->GroupMembership->find('list',array(
-			'conditions'=>array(
-				'GroupMembership.group_id'=>$this->current_group_id,
-				'GroupMmebership.user_id'=>$this->current_user_id				
-				)));
-				if(is_null($membership_exists)){
-					$group = $this->current_group;
+		if (!empty($this->current_group)&&!empty($this->current_user)&&empty($this->role)) {
 					$this->GroupMembership->create();
 					$mdata = array(
 						'GroupMembership'=>array(
@@ -47,15 +40,14 @@ class GroupMembershipsController extends AppController {
 								'role'=>GroupMembership::member
 							)		
 						);
-						
 					if ($this->GroupMembership->save($mdata)) {
 						$this->Session->setFlash(__('The group membership has been saved', true));
-						$this->redirect("/group/{$group['Group']['gid']}");
+						$this->redirect("/group/{$this->current_gid}");
 					} else {
 						$this->Session->setFlash(__('The group membership could not be saved. Please, try again.', true));
 					}					
-				}
-
+		}else{
+			$this->redirect(array('action'=>'index'));
 		}
 	}
 

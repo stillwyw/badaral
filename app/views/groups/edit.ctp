@@ -1,5 +1,5 @@
 <div class="groups form">
-<?php echo $this->Form->create('Group');?>
+<?php echo $this->Form->create('Group',array('url'=>"/group/{$gid}/manage"));?>
 	<fieldset>
  		<legend><?php __('Edit Group'); ?></legend>
 	<?php

@@ -47,7 +47,7 @@
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('小组管理', true), array('action' => 'edit', $group['Group']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('小组管理', true), "/group/{$gid}/manage"); ?> </li>
 		<li><?php echo $this->Html->link(__('Delete Group', true), array('action' => 'delete', $group['Group']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $group['Group']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('返回我的小组', true), "/group"); ?> </li>
 		<li><?php echo $this->Html->link(__('添加新讨论', true), "/group/{$gid}/post/new"); ?> </li>

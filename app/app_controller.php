@@ -25,6 +25,7 @@ class AppController extends Controller {
 			$this->current_user = $this->Auth->user();
 			$this->current_user_id = $this->current_user['User']['id'];
 			
+			
 			$this->set('cuid',$this->current_user_id);
 			$this->set('current_user',$this->current_user);
 
@@ -45,6 +46,7 @@ class AppController extends Controller {
 			$group = $this->Group->findByGid($this->params['gid']);
 			$this->current_group = $group;
 			$this->current_group_id = $group['Group']['id'];
+			$this->current_gid = $group['Group']['gid'];
 			$this->set('gid',$this->params['gid']);
 		}
 	}
