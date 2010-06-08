@@ -15,8 +15,11 @@ class LocationsController extends AppController {
 			}
 		}
 		if(isset($this->params['province'])){
+			echo $this->params['province'];
 			$province = $this->Province->findByProvince($this->params['province']);
+			$cities = $this->City->findAllByFatherid($province['Province']['provinceid']);
 			$this->set('province',$province);
+			$this->set('cities',$cities);
 		}else{
 			$provinces = $this->Province->find('all');
 			$this->set('provinces',$provinces);

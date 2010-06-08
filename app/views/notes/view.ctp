@@ -84,11 +84,8 @@
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo  $noteLink->editLink($note['Note']['id'],$note['Note']['user_id'],$cuid); ?> </li>
-		<li><?php echo $this->Html->link(__('Delete Note', true), array('action' => 'delete', $note['Note']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $note['Note']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Notes', true), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Note', true), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Users', true), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User', true), array('controller' => 'users', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('修改', true), array('action' => 'edit', $note['Note']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('删除', true), array('action' => 'delete', $note['Note']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $note['Note']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('返回日记', true), "/people/{$cuid}/diary"); ?> </li>
 	</ul>
 </div>

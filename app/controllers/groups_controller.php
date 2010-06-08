@@ -11,7 +11,7 @@ class GroupsController extends AppController {
 	function beforeFilter()
 	{
 		parent::beforeFilter();
-		if ($this->params['action']!='index') {
+		if ($this->params['action']!='index'and$this->params['action']!='add') {
 		if((!empty($this->current_group)&&!empty($this->current_user))){
 			$membership = $this->GroupMembership->find('first',array(
 			'conditions'=>array(
@@ -53,8 +53,8 @@ class GroupsController extends AppController {
 		$posts = $this->GroupPost->query("SELECT * FROM `group_posts` as `GroupPost`
 													join groups as `Group` on `Group`.id = `GroupPost`.group_id
 													join group_memberships as `GroupMembership` on `GroupMembership`.group_id = `Group`.id
-													join users as `User` on `User`.id = `GroupMembership`.user_id
-													where `User`.id = ? order by `GroupPost`.id desc limit 20 ",array($userId));
+													join users as `User` on `User`.id = `GroupPost`.user_id
+													where `GroupMembership`.user_id = ? order by `GroupPost`.id desc limit 20 ",array($userId));
 		$groups_joined = $this->Group->query("SELECT * FROM `groups` as `Group` 
 					JOIN group_memberships as `GroupMembership` on `GroupMembership`.group_id = `Group`.id
 					where `GroupMembership`.user_id = ?	and `GroupMembership`.role = ? ", array($userId, GroupMembership::member));
@@ -89,6 +89,7 @@ class GroupsController extends AppController {
 
 	function add() {
 		if (!empty($this->data)) {
+			echo 'here';
 			$this->Group->create();
 			if ($this->Group->save($this->data)) {
 				$groupId = $this->Group->id;
@@ -109,7 +110,6 @@ class GroupsController extends AppController {
 				$this->Session->setFlash(__('The group could not be saved. Please, try again.', true));
 			}
 		}
-		$users = $this->Group->User->find('list');
 		$this->set(compact('users'));
 	}
 

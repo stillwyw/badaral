@@ -20,7 +20,7 @@ class Province extends AppModel {
 		),
 		'City' => array(
 			'className' => 'City',
-			'foreignKey' => 'fatherid',
+			'foreignKey' => 'provinceid',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',

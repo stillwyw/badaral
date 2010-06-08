@@ -35,9 +35,9 @@
 	Router::connect('/group/:gid/manage',array('controller'=>'groups','action'=>'edit'));
 	Router::connect('/people/:userid',array('controller'=>'users','action'=>'view'));
 	Router::connect('/people/:userid/diary', array('controller'=>'notes','action'=>'index'));
-	Router::connect('/location/:province/:city',array('controller'=>'locations','action'=>'choose'));
- 
- 
+	Router::connect('/location',array('controller'=>'locations','action'=>'index'));
+	Router::connect('/location/:province',array('controller'=>'locations','action'=>'index')); 
+	Router::connect('/location/:province/:city',array('controller'=>'locations','action'=>'index')); 
  
 /**
  * Here, we are connecting '/' (base path) to controller called 'Pages',

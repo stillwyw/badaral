@@ -5,7 +5,7 @@ class AppController extends Controller {
 	
 	function beforeFilter()
 	{
-	
+
 		$this->Auth->fields = array('username' => 'email', 'password' => 'password');
 	
 		$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
@@ -14,7 +14,9 @@ class AppController extends Controller {
 		
 		$this->Auth->logoutRedirect = '/';
 		
-		$this->Auth->loginError = 'Invalid e-mail / password combination.  Please try again';
+		$this->Auth->loginError = '用户名或密码错误，请重试。';
+		
+		$this->Auth->authError = "对不起，请先登录。";
 		
 		$this->Auth->authorize = 'controller';
 		
@@ -39,6 +41,7 @@ class AppController extends Controller {
 			$this->user = $user;
 			if($this->user){
 				$this->userid = $this->user['User']['id'];
+				$this->set('uid',$this->user['User']['uid']);
 			}
 		}
 		// group stuffs

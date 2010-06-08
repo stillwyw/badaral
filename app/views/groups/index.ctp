@@ -17,18 +17,12 @@
 		}
 	?>
 	<tr<?php echo $class;?>>
-		<td><?php echo $post['GroupPost']['id']; ?>&nbsp;</td>
-		<td><?php echo $post['GroupPost']['title']; ?>&nbsp;</td>
+		<td><?php echo $this->Html->link(__($post['GroupPost']['title'], true), array('controller' => 'group_posts', 'action' => 'view', $post['GroupPost']['id'])); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($post['User']['username'], array('controller' => 'users', 'action' => 'view', $post['User']['uid'])); ?>
+			<?php echo $this->Html->link($post['User']['username'], "/people/{$post['User']['uid']}"); ?>
 		</td>
 		<td><?php echo $post['GroupPost']['created']; ?>&nbsp;</td>
-		<td><?php echo $post['GroupPost']['updated']; ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $post['GroupPost']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $post['GroupPost']['id'])); ?>
-			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $post['GroupPost']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $post['GroupPost']['id'])); ?>
-		</td>
+
 	</tr>
 <?php endforeach; ?>
 	</table>
