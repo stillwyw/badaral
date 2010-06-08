@@ -24,9 +24,11 @@
 		</dd>
 
 
-
+		<?php if ($own): ?>
 		<?php echo $this->Html->link(__('修改', true), array('action' => 'edit', $groupPost['GroupPost']['id'])); ?>
-		<?php echo $this->Html->link(__('删除', true), array('action' => 'delete', $groupPost['GroupPost']['id']), null, sprintf(__('确定删除吗?', true))); ?>
+		<?php echo $this->Html->link(__('删除', true), array('action' => 'delete', $groupPost['GroupPost']['id']), null, sprintf(__('确定删除吗?', true))); ?>			
+		<?php endif ?>
+
 	</dl>
 </div>
 <div class="actions">

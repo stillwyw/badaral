@@ -20,13 +20,16 @@ class GroupPostsController extends AppController {
 			
 			$this->current_group=$this->Group->findById($this->post['GroupPost']['group_id']);
 			$this->current_group_id = $this->current_group['Group']['id'];
-			$this->set('gid',$this->current_group['Group']['gid']);
+			$this->gid = $this->current_group['Group']['gid'];
+			$this->set('gid',$this->gid);
 			$this->set('group',$this->current_group);
 			$this->post_owner_id = $this->post['GroupPost']['user_id'];
-			if(empty($this->post)){
-				echo 'post not fond';
+			if ($this->post_owner_id==$this->current_user_id) {
+				$this->own = true;
 			}else{
+				$this->own = false;
 			}
+			$this->set('own',$this->own );
 		}else{
 		}
 		
@@ -66,11 +69,12 @@ class GroupPostsController extends AppController {
 	}
 
 	function edit($id = null) {
-		if (!isset($this->post)or($this->post_owner_id!=$this->current_user_id)) {
+		if (!isset($this->post)or!$this->own) {
 			$this->Session->setFlash(__('该页面不存在,或权限不足。', true));
 			$this->redirect("/group");
 		}
 		if (!empty($this->data)) {
+			$this->GroupPost->id = $id;
 			if ($this->GroupPost->save($this->data)) {
 				$this->Session->setFlash(__('修改成功', true));
 				$this->redirect("/group_posts/view/{$id}");
@@ -84,16 +88,16 @@ class GroupPostsController extends AppController {
 	}
 
 	function delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for group post', true));
-			$this->redirect(array('action'=>'index'));
+		if (!isset($this->post)or!$this->own) {
+			$this->Session->setFlash(__('无权进行该操作。', true));
+			$this->redirect("/group");
 		}
 		if ($this->GroupPost->delete($id)) {
-			$this->Session->setFlash(__('Group post deleted', true));
-			$this->redirect(array('action'=>'index'));
+			$this->Session->setFlash(__('讨论已删除。', true));
+			$this->redirect("/group/{$this->gid}");
 		}
-		$this->Session->setFlash(__('Group post was not deleted', true));
-		$this->redirect(array('action' => 'index'));
+		$this->Session->setFlash(__('出现问题，稍后再试。', true));
+		$this->redirect("/group/{$this->gid}");
 	}
 }
 ?>
