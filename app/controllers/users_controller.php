@@ -69,7 +69,7 @@ class UsersController extends AppController {
 	
 	
 	function logout(){
-		$this->Cookie->del('Auth.User');
+		$this->Cookie->delete('Auth.User');
 		$this->redirect($this->Auth->logout());
 	}
 	

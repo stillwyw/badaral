@@ -41,6 +41,7 @@ class AppController extends Controller {
 			$this->user = $user;
 			if($this->user){
 				$this->userid = $this->user['User']['id'];
+				$this->uid = $this->user['User']['uid'];
 				$this->set('uid',$this->user['User']['uid']);
 			}
 		}
@@ -52,6 +53,9 @@ class AppController extends Controller {
 			$this->current_gid = $group['Group']['gid'];
 			$this->set('gid',$this->params['gid']);
 		}
+		// ownership
+		$this->set('own',($this->current_user_id==$this->userid));
+
 	}
 	
 	function isAuthorized() {

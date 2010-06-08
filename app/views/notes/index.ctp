@@ -43,6 +43,9 @@
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
+		<?php if ($own): ?>
 		<li><?php echo $this->Html->link(__('添加新日记', true), array('action' => 'add')); ?></li>
+			
+		<?php endif ?>
 	</ul>
 </div>
