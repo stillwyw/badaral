@@ -6,7 +6,7 @@ class NotesController extends AppController {
 	var $components = array('Session');
 	var $helpers = array('NoteLink');
 	var $paginate=array(
-		'limit'=>5
+		'limit'=>1
 		);
 		
 	function beforeFilter()
@@ -23,13 +23,13 @@ class NotesController extends AppController {
 			$this->user = $this->User->findById($this->note['Note']['user_id']);
 			$this->uid = $this->user['User']['uid'];
 			$this->owner_id = $this->user['User']['id'];
-			$this->own = ($this->owner_id == $this->current_user_id);
+			$this->own = ($this->owner_id == $this->cuid);
 			$this->set('own',$this->own);
 		}
 	}
 	function index() {
-		if(isset($this->userid)){
-		$datas = $this->paginate('Note',array('user_id'=>$this->userid));
+		if(isset($this->uid)){
+		$datas = $this->paginate('Note',array('user_id'=>$this->uid));
 		}
 		$this->set('notes', $datas);
 	}

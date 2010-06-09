@@ -22,7 +22,7 @@ class GuestsController extends AppController {
 			$this->Guest->create();
 			if ($this->Guest->save($this->data)) {
 				$this->Session->setFlash(__('The guest has been saved', true));
-				$this->redirect("/people/{$this-}");
+				$this->redirect($this->Session->read('prev_url'));
 			} else {
 				$this->Session->setFlash(__('The guest could not be saved. Please, try again.', true));
 			}

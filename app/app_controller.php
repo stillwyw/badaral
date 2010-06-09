@@ -81,7 +81,7 @@ class AppController extends Controller {
 
 	function afterFilter()
 	{
-		$this->Session->write('prev_url',$this->params['url']);
+		$this->Session->write('prev_url',$this->here);
 
 	}
 

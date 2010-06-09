@@ -98,7 +98,7 @@ class UsersController extends AppController {
 		$guests=$this->Guest->find('all',array('conditions'=>array('Guest.user_id'=>$this->uid),'limit'=>10));
 		$this->set('guests', $guests);
 		$this->set('user', $this->user);
-		echo $this->params['url'];
+		echo $this->Session->read('prev_url');
 	}
 
 	function add() {
