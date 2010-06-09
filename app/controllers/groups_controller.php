@@ -15,8 +15,8 @@ class GroupsController extends AppController {
 		if((!empty($this->current_group)&&!empty($this->current_user))){
 			$membership = $this->GroupMembership->find('first',array(
 			'conditions'=>array(
-				'GroupMembership.group_id'=>$this->current_group_id,
-				'GroupMembership.user_id'=>$this->current_user_id				
+				'GroupMembership.group_id'=>$this->cgid,
+				'GroupMembership.user_id'=>$this->cuid				
 				)));
 			$this->role = $membership['GroupMembership']['role'];
 			$this->set('group_role',$this->role);
@@ -68,7 +68,7 @@ class GroupsController extends AppController {
 
 	function view($gid = null) {
 		$group = $this->current_group;
-		$group_id = $this->current_group_id;
+		$group_id = $this->cgid;
 		if (!isset($group)&&!$group) {
 			$this->Session->setFlash(__('Invalid group', true));
 			$this->redirect(array('action' => 'index'));
@@ -79,7 +79,7 @@ class GroupsController extends AppController {
 		$creatorId = $creatorId['GroupMembership']['user_id'];
 		$creator=$this->User->findById($creatorId);
 		$memberShips = $this->GroupMembership->find('list',array('fields'=>'GroupMembership.user_id',
-				'conditions'=>array("GroupMembership.group_id"=>$this->current_group_id, "GroupMembership.role <>"=>GroupMembership::blocked)
+				'conditions'=>array("GroupMembership.group_id"=>$this->cgid, "GroupMembership.role <>"=>GroupMembership::blocked)
 				));
 		$members = $this->User->find('all',array('conditions'=>array('User.id '=>$memberShips),'limit'=>10,'order'=>'id desc'));
 		$this->set('members',$members);
@@ -99,7 +99,7 @@ class GroupsController extends AppController {
 				$_data = array(
 					'GroupMembership'=>
 						array(
-						'user_id'=>$this->current_user_id,
+						'user_id'=>$this->cuid,
 						'group_id'=>$groupId,
 						'role'=>GroupMembership::admin
 					));

@@ -19,12 +19,12 @@ class GroupPostsController extends AppController {
 			$this->post = $this->GroupPost->findById($post_id);
 			
 			$this->current_group=$this->Group->findById($this->post['GroupPost']['group_id']);
-			$this->current_group_id = $this->current_group['Group']['id'];
-			$this->gid = $this->current_group['Group']['gid'];
-			$this->set('gid',$this->gid);
+			$this->cgid = $this->current_group['Group']['id'];
+			$this->cggid = $this->current_group['Group']['gid'];
+			$this->set('cggid',$this->cggid);
 			$this->set('group',$this->current_group);
 			$this->post_owner_id = $this->post['GroupPost']['user_id'];
-			if ($this->post_owner_id==$this->current_user_id) {
+			if ($this->post_owner_id==$this->cuid) {
 				$this->own = true;
 			}else{
 				$this->own = false;
@@ -50,13 +50,13 @@ class GroupPostsController extends AppController {
 
 	function add() {
 		$group=$this->current_group;
-		$group_id = $this->current_group_id;
+		$group_id = $this->cgid;
 		
 		if (!empty($group)&&!empty($this->data)) {
 			$this->GroupPost->create();
 			if ($this->GroupPost->save($this->data)) {
 				$this->GroupPost->saveField('group_id',$group_id);
-				$this->GroupPost->saveField('user_id',$this->current_user_id);
+				$this->GroupPost->saveField('user_id',$this->cuid);
 				$this->Session->setFlash(__('The group post has been saved', true));
 				$this->redirect("/group/{$group['Group']['gid']}");
 			} else {
@@ -94,10 +94,10 @@ class GroupPostsController extends AppController {
 		}
 		if ($this->GroupPost->delete($id)) {
 			$this->Session->setFlash(__('讨论已删除。', true));
-			$this->redirect("/group/{$this->gid}");
+			$this->redirect("/group/{$this->cggid}");
 		}
 		$this->Session->setFlash(__('出现问题，稍后再试。', true));
-		$this->redirect("/group/{$this->gid}");
+		$this->redirect("/group/{$this->cggid}");
 	}
 }
 ?>

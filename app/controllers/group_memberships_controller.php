@@ -10,8 +10,8 @@ class GroupMembershipsController extends AppController {
 		if(!empty($this->current_group)&&!empty($this->current_user)){
 			$this->membership = $this->GroupMembership->find('first',array(
 			'conditions'=>array(
-				'GroupMembership.group_id'=>$this->current_group_id,
-				'GroupMembership.user_id'=>$this->current_user_id				
+				'GroupMembership.group_id'=>$this->cgid,
+				'GroupMembership.user_id'=>$this->cuid				
 				)));
 			$this->role = $this->membership['GroupMembership']['role'];
 			$this->set('group_role',$this->role);
@@ -35,8 +35,8 @@ class GroupMembershipsController extends AppController {
 					$this->GroupMembership->create();
 					$mdata = array(
 						'GroupMembership'=>array(
-							'group_id'=>$this->current_group_id,
-							"user_id"=>$this->current_user_id,
+							'group_id'=>$this->cgid,
+							"user_id"=>$this->cuid,
 								'role'=>GroupMembership::member
 							)		
 						);

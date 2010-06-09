@@ -3,6 +3,7 @@ class UsersController extends AppController {
 
 	var $name = 'Users';
 	var $components = array('Session','Cookie');
+	var $uses = array('User','Guest','Group','Note');
 	
 	function beforeFilter(){
 	//  $this->Cookie->name = 'baker_id';
@@ -22,7 +23,14 @@ class UsersController extends AppController {
 		$this->set('users', $this->paginate());
 	}
 
-
+	function mine()
+	{
+		if(isset($this->cuid) and isset($this->cuuid)){
+			$this->redirect("/people/{$this->cuuid}/");
+		}else{
+			$this->redirect('/');
+		}
+	}
 	 function signup() {
 		 if ($this->data) {
  			if ($this->data['User']['password'] == $this->Auth->password($this->data['User']['password_confirm'])) {
@@ -81,18 +89,16 @@ class UsersController extends AppController {
 		}
 	}
 	
-	function show(){
-		
-		
-		
-	}
-	
+
 	function view() {
-		if (!isset($this->params['userid'])) {
+		if (!isset($this->params['uid'])) {
 			$this->Session->setFlash(__('Invalid user', true));
 			$this->redirect('/');
 		}
+		$guests=$this->Guest->find('all',array('conditions'=>array('Guest.user_id'=>$this->uid),'limit'=>10));
+		$this->set('guests', $guests);
 		$this->set('user', $this->user);
+		echo $this->params['url'];
 	}
 
 	function add() {
