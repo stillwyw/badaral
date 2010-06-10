@@ -6,7 +6,7 @@ class NotesController extends AppController {
 	var $components = array('Session');
 	var $helpers = array('NoteLink');
 	var $paginate=array(
-		'limit'=>1
+			'limit'=>10
 		);
 		
 	function beforeFilter()

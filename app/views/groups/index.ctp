@@ -1,9 +1,30 @@
+<div id="sidebar1">
+<div id="name">
+	<h2><?php __('我管理的小组dd') ?></h2>
+	<?php foreach ($groups_admined as $group): ?>
+		<?php echo $html->link($group['Group']['name'], "/group/{$group['Group']['gid']}") ?>
+	<?php endforeach ?>
+</div>
+<div id="name">
+	<h2><?php __('我加入的小组dd') ?></h2>
+	<?php foreach ($groups_joined as $group): ?>
+		<?php echo $html->link($group['Group']['name'], "/group/{$group['Group']['gid']}") ?>
+	<?php endforeach ?>
+</div>
+
+<div class="actions">
+	<h3><?php __('Actions'); ?></h3>
+	<ul>
+		<li><?php echo $this->Html->link(__('创建小组', true), array('controller' => 'groups', 'action' => 'add')); ?> </li>
+
+	</ul>
+</div>
+</div>
 
 
 
 
-
-<div class="posts index">
+<div id="mainContent">
 
 	<h2><?php __('小组最近更新');?></h2>
 
@@ -26,24 +47,4 @@
 	</tr>
 <?php endforeach; ?>
 	</table>
-</div>
-<div id="name">
-	<h2><?php __('我管理的小组dd') ?></h2>
-	<?php foreach ($groups_admined as $group): ?>
-		<?php echo $html->link($group['Group']['name'], "/group/{$group['Group']['gid']}") ?>
-	<?php endforeach ?>
-</div>
-<div id="name">
-	<h2><?php __('我加入的小组dd') ?></h2>
-	<?php foreach ($groups_joined as $group): ?>
-		<?php echo $html->link($group['Group']['name'], "/group/{$group['Group']['gid']}") ?>
-	<?php endforeach ?>
-</div>
-
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('创建小组', true), array('controller' => 'groups', 'action' => 'add')); ?> </li>
-
-	</ul>
-</div>
+</div><!--mainContent end-->

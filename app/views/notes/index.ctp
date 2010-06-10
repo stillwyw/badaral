@@ -1,4 +1,12 @@
-<div class="notes index">
+<div id="sidebar1">
+	<ul>
+		<?php if ($own): ?>
+		<li><?php echo $this->Html->link(__('添加新日记', true), array('action' => 'add')); ?></li>
+			
+		<?php endif ?>
+	</ul>
+</div>
+<div id="mainContent">
 	<h2><?php __('Notes');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<?php
@@ -30,7 +38,7 @@
 	<?php
 	$paginator->options(array('url' => "../../people/{$uid}/diary"));
 	echo $this->Paginator->counter(array(
-	'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
+	'format' => __('第 %page% / %pages% 页,  %current% / %count% 条目, 第 %start%到 %end% 条', true)
 	));
 	?>	</p>
 
@@ -40,13 +48,4 @@
  |
 		<?php echo $this->Paginator->next(__('next', true) . ' >>', array("/people/{$current_user['User']['uid']}/diary"), null, array('class' => 'disabled'));?>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<?php if ($own): ?>
-		<li><?php echo $this->Html->link(__('添加新日记', true), array('action' => 'add')); ?></li>
-			
-		<?php endif ?>
-	</ul>
 </div>
