@@ -35,11 +35,9 @@
   <div id="content">
   	
   	  	<?php echo $content_for_layout ?>
-
   <div>  <!-- end content-->
-  <div class="end">
+  	<div style="clear:both;"></div>
 
-  </div>
   <!---end-->
 </div>
 <!---content-->
