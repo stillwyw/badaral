@@ -1,0 +1,21 @@
+/* CSS Document */
+.mid{  float:left;background: url(../images/midbg.gif) repeat-y 0 0; height:100%; margin:10px 0 10px 0;}
+/*right*/
+.subright{float:right;width:670px;padding:0 0 0px 30px;_padding:0 0 0 20px; }
+.title{height:40px;background: url(../images/tittlebg.gif) repeat-x ; padding:0 0 5px 0;margin-right:10px;}
+.title p{padding:15px 0 0 10px;}
+.case{padding:18px 10px 10px 0; height:160px; overflow:hidden;border-bottom:1px dotted #dcdcdc;margin-right:34px;}
+.case .casecon{ float:left;width:110px; padding:0 20px 0 28px; border-right:1px dotted #dcdcdc;}
+.case .last{border-right:none;}
+.case .first{padding-left:10px;;}
+.case .casecon p{ line-height:1.6em;padding-top:2px;}
+.pic{padding:5px 0 0 10px;}
+.job {padding:10px; border-bottom:2px solid #f1eee6;margin-right:10px;}
+.news li{padding:5px 0 5px 10px; list-style:none;}
+.subright .news{padding:5px 20px 10px 16px;}
+.subright .news .tit{padding:5px 20px 10px 16px; text-align:center;font-weight:bold;}
+.subright p{ line-height:2em;}
+.mid .search{ float:left;height:100%; width:99%; margin:0 10px 0 10px; _margin:0 0 0 5px;background-color:#F7F7F7;}
+.mid .search .con{width:810px; padding-bottom:5px; margin:5px 20px 5px 50px;border-bottom:2px solid #f1eee6; }
+.mid .search .search{ float:left; text-align:center;}
+.mid .search .search .text{height:16px; width:120px; background-color:#F1EEE7;border:1px solid #dedace; margin: 0 5px 10px 0 ; padding:1px 1px 0;color:#7d776b;vertical-align:middle;}

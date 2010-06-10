@@ -1,0 +1,29 @@
+/* CSS Document */
+#head{height:52px;bgcolor:#f7f7f7;}
+#head_logo{float: left;height:52px;width:160px;margin:0px 0px 0px 0px;}
+#head_right{float: right;height:52px;}
+
+.nav{float:left;line-height:normal;height: 37px;padding-left: 10px;padding-right: 10px;width:910px;background:url(../images/mbg.gif) repeat-x;}
+    .nav ul {margin:0;list-style:none; padding: 0px 6px 0px 20px;}
+    .nav li {display:inline;margin:0;padding:0;height: 37px;width:80px;background: url("../images/nav02_1.gif") right top;}
+    .nav a {height: 37px; padding: 10px 11px 11px 6px;line-height: 15px;font: 13px bold;color: #ffffff;}
+    .nav a:hover {background-position:0 -50px;}
+	
+.page_l {float:left;width:262px;padding:10px 8px 0px 10px;}
+.t_t{float:right;height:7px;width:640px;padding:0px 5px 0px 0px;background-color: #f7f7f7;}
+.t_t1{float:right;height:25px;width:630px;padding:10px 5px 10px 10px;background-color: #dfdace;}
+
+.r_r {float:left;height:195px;padding:5px 5px 5px 5px;}
+.m_m {float:left;width:630px;padding:5px 5px 5px 5px;background: url(../images/line_m.gif) repeat-x center;}
+#m_m1 {float:left;height:180px;padding:5px 5px 5px 5px;}
+.m_m2 {float:left;height:210px;padding:5px 5px 5px 5px;}
+
+.b_b {float:left;height:80px;width:160px;padding:10px 0px 0px 10px;background-color: #f1eee6;}
+.b_b1 a {float:left;padding:0px 0px 0px 5px;background: url(../images/b_b1.gif) no-repeat center top;width:144px;height:23px;display:block;text-indent:0px -23px;}
+.b_b2 a {float:left;padding:0px 0px 0px 5px;background: url(../images/b_b2.gif) no-repeat center top;width:144px;height:18px;display:block;text-indent:0px -18px;}
+.b_b3 a {float:left;padding:0px 0px 0px 5px;background: url(../images/b_b3.gif) no-repeat center top;width:144px;height:22px;display:block;text-indent:0px -22px;}
+.b_b1 a: hover {background-position: 0% 50%;}
+.b_b2 a: hover {background-position: 0% 50%;}
+.b_b3 a: hover {background-position: 0% 50%;}
+
+.b_end {float:right;width:450px;height:60px;padding:10px 10px 10px 10px;background-color: #d4cfc2;}
