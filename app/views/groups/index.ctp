@@ -1,4 +1,4 @@
-<div id="sidebar1">
+<div class="right">
 <div id="name">
 	<h2><?php __('我管理的小组dd') ?></h2>
 	<?php foreach ($groups_admined as $group): ?>
@@ -24,7 +24,7 @@
 
 
 
-<div id="mainContent">
+<div class="left">
 
 	<h2><?php __('小组最近更新');?></h2>
 
@@ -42,9 +42,24 @@
 		<td>
 			<?php echo $this->Html->link($post['User']['username'], "/people/{$post['User']['uid']}"); ?>
 		</td>
+		<td> <?php echo $this->Html->link("{$post['Group']['name']}小组", "/group/{$post['Group']['gid']}"); ?></td>
 		<td><?php echo $post['GroupPost']['created']; ?>&nbsp;</td>
 
 	</tr>
 <?php endforeach; ?>
 	</table>
+		<p>
+	<?php
+	$paginator->options(array('url' => "../../group"));
+	echo $this->Paginator->counter(array(
+	'format' => __('第 %page% / %pages% 页,  %current% / %count% 条目, 第 %start%到 %end% 条', true)
+	));
+	?>	</p>
+
+	<div class="paging">
+		<?php echo $this->Paginator->prev('<< ' . __('previous', true), array(), null, array('class'=>'disabled'));?>
+	 | 	<?php echo $this->Paginator->numbers();?>
+ |
+		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
+	</div>
 </div><!--mainContent end-->

@@ -28,39 +28,17 @@ class GroupsController extends AppController {
 
 	}
 	function index() {
-		//$this->Group->recursive = 0;
-		$userId = $this->current_user['User']['id'];
-/*
-		$groups_joind = $this->User->GroupMembership->Group->find('all',array(
-			'recursive'=>3,
-			'conditions'=>array('User.id '=>$userId),
-			'limit'=>10,
-			'order'=>'GroupMembership.created'									
-			));
-*/
-/*   
-	//this is a useable code but little bit un-efficient ....
-		$group_ids = $this->User->GroupMembership->find('list',array(
-			'fields'=>array('GroupMembership.group_id','GroupMembership.group_id'),
-			'conditions'=>array('GroupMembership.user_id'=>$userId)
-			));
-		$posts = $this->User->GroupMembership->Group->GroupPost->find('all',array(
-																														'conditions'=>array('Group.id'=>$group_ids),
-																														'limit'=>20,
-																														'order'=>array('GroupPost.id','desc')
-																														));
-*/
-		$posts = $this->GroupPost->query("SELECT * FROM `group_posts` as `GroupPost`
-													join groups as `Group` on `Group`.id = `GroupPost`.group_id
-													join group_memberships as `GroupMembership` on `GroupMembership`.group_id = `Group`.id
-													join users as `User` on `User`.id = `GroupPost`.user_id
-													where `GroupMembership`.user_id = ? order by `GroupPost`.id desc limit 20 ",array($userId));
+
+		$group_ids = $this->GroupMembership->find('list',array('fields'=>array('GroupMembership.group_id'),'conditions'=>array('GroupMembership.user_id'=>$this->cuid)));
+		
+		$posts = $this->paginate('GroupPost',array("GroupPost.group_id"=>$group_ids));
+		
 		$groups_joined = $this->Group->query("SELECT * FROM `groups` as `Group` 
 					JOIN group_memberships as `GroupMembership` on `GroupMembership`.group_id = `Group`.id
-					where `GroupMembership`.user_id = ?	and `GroupMembership`.role = ? ", array($userId, GroupMembership::member));
+					where `GroupMembership`.user_id = ?	and `GroupMembership`.role = ? ", array($this->cuid, GroupMembership::member));
 		$groups_admined = $this->Group->query("SELECT * FROM `groups` as `Group` 
 					JOIN group_memberships as `GroupMembership` on `GroupMembership`.group_id = `Group`.id
-					where `GroupMembership`.user_id = ?	and `GroupMembership`.role = ? ", array($userId, GroupMembership::admin));
+					where `GroupMembership`.user_id = ?	and `GroupMembership`.role = ? ", array($this->cuid, GroupMembership::admin));
 		$this->set('posts',$posts);
 		$this->set('groups_joined',$groups_joined);
 		$this->set('groups_admined',$groups_admined);
