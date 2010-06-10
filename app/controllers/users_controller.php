@@ -95,10 +95,9 @@ class UsersController extends AppController {
 			$this->Session->setFlash(__('Invalid user', true));
 			$this->redirect('/');
 		}
-		$guests=$this->Guest->find('all',array('conditions'=>array('Guest.user_id'=>$this->uid),'limit'=>10));
+		$guests=$this->Guest->find('all',array('conditions'=>array('Guest.user_id'=>$this->uid),'limit'=>5));
 		$this->set('guests', $guests);
 		$this->set('user', $this->user);
-		echo $this->Session->read('prev_url');
 	}
 
 	function add() {

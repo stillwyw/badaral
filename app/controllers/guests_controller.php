@@ -18,11 +18,14 @@ class GuestsController extends AppController {
 	}
 
 	function add() {
+		if(is_null($this->referer())){
+			$this->redirect('/signin');
+		}
 		if (!empty($this->data)) {
 			$this->Guest->create();
 			if ($this->Guest->save($this->data)) {
 				$this->Session->setFlash(__('The guest has been saved', true));
-				$this->redirect($this->Session->read('prev_url'));
+				$this->redirect($this->referer());
 			} else {
 				$this->Session->setFlash(__('The guest could not be saved. Please, try again.', true));
 			}

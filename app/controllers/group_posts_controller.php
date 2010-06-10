@@ -49,6 +49,7 @@ class GroupPostsController extends AppController {
 	}
 
 	function add() {
+
 		$group=$this->current_group;
 		$group_id = $this->cgid;
 		
