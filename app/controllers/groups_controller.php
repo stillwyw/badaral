@@ -5,7 +5,8 @@ class GroupsController extends AppController {
 	var $uses = array('GroupPost','Group','User','GroupMembership');
 	var $components = array('Session');
 	var $paginate=array(
-			'limit'=>4
+			'limit'=>4,
+			'order'=>array('GroupPost.created desc')
 			);
 
 	function beforeFilter()

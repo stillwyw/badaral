@@ -9,8 +9,8 @@ class GuestsController extends AppController {
 		$this->set('guests', $this->paginate());
 	}
 
-	function view($id = null) {
-		if (!$id) {
+	function view($gid = null) {
+		if (!$gid) {
 			$this->Session->setFlash(__('Invalid guest', true));
 			$this->redirect(array('action' => 'index'));
 		}
@@ -33,8 +33,8 @@ class GuestsController extends AppController {
 		$this->set(compact('users'));
 	}
 
-	function edit($id = null) {
-		if (!$id && empty($this->data)) {
+	function edit($gid = null) {
+		if (!$gid && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid guest', true));
 			$this->redirect(array('action' => 'index'));
 		}

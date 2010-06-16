@@ -50,7 +50,7 @@
 	</table>
 		<p>
 	<?php
-	$paginator->options(array('url' => "../../group"));
+	$paginator->options(array('url' => $this->passedArgs));
 	echo $this->Paginator->counter(array(
 	'format' => __('第 %page% / %pages% 页,  %current% / %count% 条目, 第 %start%到 %end% 条', true)
 	));

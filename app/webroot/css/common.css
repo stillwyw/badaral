@@ -47,7 +47,7 @@ input,select,textarea {
 	font-weight:inherit;
 	color:inherit;
 	outline:none;
-	border:none;
+	border:1px #cccccc solid;
 }
 
 .btn,.submit {
