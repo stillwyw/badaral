@@ -25,6 +25,7 @@
     	<li><?php if(isset($current_user)){
     		echo $html->link($current_user['User']['username'], '/settings'); 
     		} ?> </li>
+    	<li><?php echo $html->link('活动', '/events') ?></li>
     	<li><?php if(isset($current_user)){
     		echo $html->link('退出', '/signout') ;
     		} ?> </li>
