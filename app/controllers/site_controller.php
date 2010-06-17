@@ -1,7 +1,7 @@
 <?php
 class SiteController extends AppController {
 	var $name='Site';
-	var $uses = null;
+	var $uses = array('User');
 	var $components = array('Session');
 
 	function beforeFilter(){

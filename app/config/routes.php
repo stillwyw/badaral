@@ -39,6 +39,7 @@
 	Router::connect('/people/:uid',array('controller'=>'users','action'=>'view'));
 	Router::connect('/people/:uid/diary/*', array('controller'=>'notes','action'=>'index'));
 	Router::connect('/people/:uid/guests/*', array('controller'=>'guests','action'=>'index'));
+	Router::connect('/people/:uid/friends/*',array('controller'=>'friendships','action'=>'index'));
 	Router::connect('/location',array('controller'=>'locations','action'=>'index'));
 	Router::connect('/location/:province',array('controller'=>'locations','action'=>'index')); 
 	Router::connect('/location/:province/:city',array('controller'=>'locations','action'=>'index')); 

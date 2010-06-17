@@ -97,8 +97,8 @@
 				<?php echo $this->Form->create('Guest',array('url'=>'/guests/add'));?>
 	
 					<?php
-						echo $form->hidden('user_id',array('value'=>$cuid));
-						echo $form->hidden('sender_id',array('value'=>$uid));
+						echo $form->hidden('user_id',array('value'=>$uid));
+						echo $form->hidden('sender_id',array('value'=>$cuid));
 						echo $this->Form->input('body');
 					?>
 				<?php echo $this->Form->end(__('Submit', true));?>
@@ -115,7 +115,7 @@
 				?>
 				<tr<?php echo $class;?>>
 					<td>
-						<?php echo $this->Html->link($guest['User']['username'], array('controller' => 'users', 'action' => 'view', $guest['User']['id'])); ?>
+						<?php echo $this->Avatar->userLink($guest['Sender']['id'],$guest['Sender']['uid']) ?>
 					</td>
 					<td><?php echo $guest['Guest']['body']; ?>&nbsp;</td>
 					<td><?php echo $guest['Guest']['created']; ?>&nbsp;</td>

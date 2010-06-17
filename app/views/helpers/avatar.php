@@ -34,6 +34,12 @@ class AvatarHelper extends AppHelper {
 		}
 
 	}
+	public function userLink($uid,$uuid)
+	{
+	    $userPath = "/people/{$uuid}";
+	    $imgPath  = "/u_thumb/u_{$uid}.jpg";
+	    return "<a href='{$userPath}' ><img src='{$imgPath}' ></a>";
+	}
 	
 	
 }

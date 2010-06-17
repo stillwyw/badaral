@@ -30,7 +30,7 @@ class GroupsController extends AppController {
 	}
 	function index() {
 
-		$group_ids = $this->GroupMembership->find('list',array('fields'=>array('GroupMembership.group_id'),'conditions'=>array('GroupMembership.user_id'=>$this->cuid)));
+		$group_ids = $this->GroupMembership->find('list',array('fields'=>array('GroupMembership.groupd_id'),'conditions'=>array('GroupMembership.user_id'=>$this->cuid)));
 		
 		$posts = $this->paginate('GroupPost',array("GroupPost.group_id"=>$group_ids));
 		
