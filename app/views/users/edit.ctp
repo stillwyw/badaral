@@ -1,27 +1,32 @@
-<div class="users form">
-<?php echo $this->Form->create('User');?>
-	<fieldset>
- 		<legend><?php __('Edit User'); ?></legend>
-	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('username');
-		echo $this->Form->input('password');
-		echo $this->Form->input('email');
-		echo $this->Form->input('uid');
-		echo $this->Form->input('last_login');
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit', true));?>
+<div class="left">
+		<h2>用户设置</h2>
+		    <?php echo $session->flash() ?>
+
+	<?php echo $this->Form->create('User',array('url'=>'/settings'));?>
+	
+	<table border="0" cellspacing="5" cellpadding="5">
+		<tr><td>称号：</td><td><?php echo $this->Form->text('username') ?></td></tr>
+		<tr><td>用户id：</td><td>
+			<?php if ($this->data['User']['uid']=="u{$this->data['User']['id']}"): ?>
+				<?php echo $this->Form->text('uid') ?> （用户id为用户唯一标识，一旦设置便不能更改。）
+				<?php else: ?>
+					<?php echo $cuuid ?>
+			<?php endif ?>
+		</td></tr>
+		<tr><td>登录邮箱：</td><td>更改</td></tr>
+		<tr><td>密码：</td><td>更改</td></tr>
+		<tr><td>头像：</td><td>
+			<?php echo $this->Avatar->show($cuid) ?>
+			<?php echo $html->link('更改', '/users/upload_avatar') ?>
+		</td></tr>
+		<tr><td><?php echo $this->Form->end(__('Submit', true));?>
+	</td><td></td></tr>
+	</table>
 </div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
+
+<div class="right">
+	<h3><?php __('其他设置'); ?></h3>
 	<ul>
 
-		<li><?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $this->Form->value('User.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $this->Form->value('User.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Users', true), array('action' => 'index'));?></li>
-		<li><?php echo $this->Html->link(__('List Diaries', true), array('controller' => 'diaries', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Diary', true), array('controller' => 'diaries', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Diary Posts', true), array('controller' => 'diary_posts', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Diary Post', true), array('controller' => 'diary_posts', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

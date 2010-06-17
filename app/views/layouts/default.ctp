@@ -19,7 +19,7 @@
     	<!--<li><?php echo $html->link('关于', '/about') ?> </li>	 -->
     	<li><?php echo $html->link('我的', '/mine') ?> </li>
     	<li><?php if(isset($current_user)){
-			echo $html->link('日记', "/people/{$current_user['User']['uid']}/diary");
+			echo $html->link('日记', "/people/{$cuuid}/diary");
     	} ?> </li>
     	<li><?php echo $html->link('小组', '/groups') ?> </li>
     	<li><?php if(isset($current_user)){

@@ -25,6 +25,7 @@ class AppController extends Controller {
 		// current user
 		if($this->Auth->user()){
 			$this->current_user = $this->Auth->user();
+			$this->current_user = $this->User->findById($this->current_user['User']['id']);
 			$this->cuid = $this->current_user['User']['id'];
 			$this->cuuid = $this->current_user['User']['uid'];
 			$this->set('cuid',$this->cuid);

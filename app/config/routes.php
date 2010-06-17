@@ -27,7 +27,8 @@
 	Router::connect('/signout',array('controller'=>'users','action'=>'logout'));
 	Router::connect('/about', array('controller'=>'site', 'action'=>'about'));
 	Router::connect('/mine', array('controller'=>'users', 'action'=>'mine'));
-	Router::connect('/groups/',array('controller'=>'groups','action'=>'index'));
+	Router::connect('/groups',array('controller'=>'groups','action'=>'index'));
+	Router::connect('/settings',array('controller'=>'users','action'=>'edit'));
 	Router::connect('/group/:gid/join',array('controller'=>'group_memberships','action'=>'join'));
 	Router::connect('/group/:gid/quit',array('controller'=>'group_memberships','action'=>'quit'));
     Router::connect('/group/:gid/manage',array('controller'=>'groups','action'=>'edit'));
