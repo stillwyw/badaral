@@ -1,5 +1,13 @@
 <link href="http://sjs.sinajs.cn/uc/chatroom/css/chatroom.css" rel="stylesheet" type="text/css" />
-<script src="http://sjs.sinajs.cn/uc/chatroom/common/base_min.js" charset="UTF-8"></script><script src="http://sjs.sinajs.cn/uc/chatroom/common/chatroom_min.js" charset="UTF-8"></script><script type="text/javascript" charset="UTF-8">var wuc_chatroom = new WUCChatroom({id: 500953, name: '<?php  echo $group['Group']['name']?>', siteApi : ''});</script><script>jQuery.noConflict();</script>
+<script src="http://sjs.sinajs.cn/uc/chatroom/common/base_min.js" charset="UTF-8"></script>
+<script src="http://sjs.sinajs.cn/uc/chatroom/common/chatroom_min.js" charset="UTF-8"></script>
+<script type="text/javascript" charset="UTF-8">
+var wuc_chatroom = new WUCChatroom(
+	{id: 500953, name: '<?php  echo $group['Group']['name']?>', siteApi : ''}
+	
+);
+</script>
+<script>jQuery.noConflict();</script>
 
 <div class="left">
 	<div class="groupview">

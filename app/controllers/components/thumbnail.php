@@ -4,16 +4,26 @@ class ThumbnailComponent extends Object {
 	var $thumb_h = 50;
 	var $allow_type_list = array('image/jpeg','image/gif','image/png');
 	var $max_file_size = 512000;
-	var $u_thumb_path = 'u_thumb/';
-	var $g_thumb_path = 'g_thumb/';
 
-	public function createThumb($src_img,$src_img_type,$dst_img_name,$thumb_type)
+	public function createUserThumbs($src_img,$src_img_type,$dst_img_name,$upload_path){
+		
+		$s_h=50;
+		$s_w=50;
+		$res = $this->createThumb($src_img,$src_img_type,$dst_img_name,$upload_path,$s_w,$s_h);
+		$m_h=200;
+		$m_w=200;
+		$res += $this->createThumb($src_img,$src_img_type,$dst_img_name.'_m',$upload_path,$m_w,$m_h);
+		return $res;
+	}
+	public function createThumb($src_img,$src_img_type,$dst_img_name,$upload_path,$dst_w,$dst_h)
 	{
-		$dst_h = 50;
-		$dst_w = 50;
-		
 		list($src_w,$src_h)=getimagesize($src_img);  // 获取原图尺寸
-		
+		if ($dst_w >$src_w) {
+			$dst_w = $src_w;
+		}
+		if ($dst_h > $src_h) {
+			$dst_h = $src_h;
+		}
 		$dst_scale = $dst_h/$dst_w; //目标图像长宽比
 		$src_scale = $src_h/$src_w; // 原图长宽比
 		
@@ -45,7 +55,7 @@ class ThumbnailComponent extends Object {
 				break;			
 			default:
 				$source = null;
-				$error = "图片格式不支持！！";
+				$error = "图片格式不正确！！";
 				break;
 		}
 		
@@ -59,17 +69,7 @@ class ThumbnailComponent extends Object {
 			$final_h = intval($h*$scale);
 			imagecopyresampled($target,$croped,0,0,0,0,$final_w,$final_h,$w,$h);
 			// 保存
-			switch ($thumb_type) {
-				case 'u':
-					$path = $this->u_thumb_path;
-					break;
-				case 'g':
-					$path = $this->g_thumb_path;
-					break;			
-				default:
-					$error = 'wrong thumb type';
-					break;
-			}
+			$path = $upload_path;
 			$file = $path.$dst_img_name.".jpg";
 			imagejpeg($target, $file, 100);
 			chmod("$file",0777);

@@ -1,7 +1,7 @@
 <?php
 class AppController extends Controller {
 	var $components = array('Auth','Cookie','Session');
-	var $uses = array('User','Group','GroupMembership');
+	var $uses = array('User','Group','GroupMembership','Followship');
 	
 	function beforeFilter()
 	{
@@ -45,6 +45,7 @@ class AppController extends Controller {
 				$this->uuid = $this->user['User']['uid'];
 				$this->set('uuid', $this->uuid);
 				$this->set('uid',$this->uid);
+				$this->set('is_followed',$this->Followship->find('list',array('conditions'=>array(' Followship.user_id'=>$this->cuid,"Followship.following_id"=>$this->uid))));
 			}
 		}
 		// group stuffs

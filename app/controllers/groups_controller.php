@@ -12,7 +12,7 @@ class GroupsController extends AppController {
 	function beforeFilter()
 	{
 		parent::beforeFilter();
-		if ($this->params['action']!='index'and$this->params['action']!='add') {
+		if ($this->params['action']!='index'and$this->params['action']!='add'and$this->params['action']!='login') {
 		if((!empty($this->current_group)&&!empty($this->current_user))){
 			$membership = $this->GroupMembership->find('first',array(
 			'conditions'=>array(
@@ -30,9 +30,9 @@ class GroupsController extends AppController {
 	}
 	function index() {
 
-		$group_ids = $this->GroupMembership->find('list',array('fields'=>array('GroupMembership.groupd_id'),'conditions'=>array('GroupMembership.user_id'=>$this->cuid)));
+		$group_ids = $this->GroupMembership->find('list',array('fields'=>array('GroupMembership.group_id'),'conditions'=>array('GroupMembership.user_id'=>$this->cuid)));
 		
-		$posts = $this->paginate('GroupPost',array("GroupPost.group_id"=>$group_ids));
+		$posts = $this->paginate('GroupPost',array("GroupPost.group_id"=>$group_ids,"GroupPost.group_id is not null"));
 		
 		$groups_joined = $this->Group->query("SELECT * FROM `groups` as `Group` 
 					JOIN group_memberships as `GroupMembership` on `GroupMembership`.group_id = `Group`.id

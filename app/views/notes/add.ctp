@@ -3,6 +3,7 @@
 	<fieldset>
  		<legend><?php __('Add Note'); ?></legend>
 	<?php
+		echo $this->Form->hidden('user_id',array('value'=>$cuid));
 		echo $this->Form->input('title');
 		echo $this->Form->input('body');
 	?>

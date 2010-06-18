@@ -71,7 +71,7 @@
 	<div class="profile">
 		<ul><?php $i = 0; $class = ' class="altrow"';?>
 			<li<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $this->Avatar->show($user['User']['id']); ?>
+				<?php echo $this->Avatar->userAvatar($user,'m'); ?>
 				&nbsp;
 			</li>
 			<li<?php if ($i % 2 == 0) echo $class;?>><?php __('Username'); ?></li>
@@ -89,7 +89,18 @@
 				<?php echo $user['User']['created']; ?>
 				&nbsp;
 			</li>
+			<?php if (!$own and empty($is_followed)): ?>
+				<li> <?php echo $html->link('【加关注】', "/followships/add/{$uid}") ?></li>
+				<?php else: ?>
+					已关注。 <?php echo $html->link('【取消关注】', "/followships/delete/{$uid}") ?>
+			<?php endif ?>
 		</ull>
+	</div>
+	<div id="friends">
+	<h3>关注（<?php echo $paginator->counter(array('format'=>'%count%')); ?>）人 / 被(<?php echo $followers_count ?>)人关注</h3>
+	<?php foreach ($followings as $user): ?>
+			<?php echo $this->Avatar->userLink($user) ?>
+		<?php endforeach ?>	
 	</div>
 	<div id="guest">
 		<h2>留言本</h2>
@@ -115,7 +126,7 @@
 				?>
 				<tr<?php echo $class;?>>
 					<td>
-						<?php echo $this->Avatar->userLink($guest['Sender']['id'],$guest['Sender']['uid']) ?>
+						<?php echo $this->Avatar->userLink($guest) ?>
 					</td>
 					<td><?php echo $guest['Guest']['body']; ?>&nbsp;</td>
 					<td><?php echo $guest['Guest']['created']; ?>&nbsp;</td>

@@ -2,6 +2,9 @@
 class User extends AppModel {
 	var $name = 'User';
 	var $displayField = 'username';
+	
+	const avatar_path = 'u_thumb';
+	
 	var $validate = array(
 		'name' => array(
 			'notempty' => array(

@@ -95,6 +95,9 @@ class UsersController extends AppController {
 	
 	function upload_avatar()
 	{
+		$upload_path = User::avatar_path.'/'; #'a_path' 格式！！记得加 /
+		
+		
 		if (isset($this->cuid)) {
 			$dst_file_name = "u_{$this->cuid}";
 		}else{
@@ -102,37 +105,33 @@ class UsersController extends AppController {
 			$this->redirect('/users/upload_avatar');
 
 		}
-	//	echo $_FILES['uploadfile'];
 	    if(isset($_FILES['uploadfile'])){
-
            $file_type = $_FILES['uploadfile']['type'];	
            $file_size  = $_FILES['uploadfile']['size'];
-           $thumb_type = 'u';
            if (!in_array($file_type,$this->Thumbnail->allow_type_list)){
            		$this->Session->setFlash('只允许上传 gif jpeg png等图片格式的文件！');
            		$this->redirect('/users/upload_avatar');
-           }else{
-           	echo 'type ok!';
            }
            if($file_size>$this->Thumbnail->max_file_size){
            		$this->Session->setFlash('上传图片不得超过500K');
            		$this->redirect('/users/upload_avatar');
-           }else{
-           	echo 'size ok!';
            }
-           $ext = end(explode('.',$_FILES['uploadfile']['name']));
-           $tmp_name = time().'_'.'u_'.$this->cuid;
-    	    $src_file="tmpimgs/".$tmp_name.'.'.$ext; 
+           
+			$ext = end(explode('.',$_FILES['uploadfile']['name']));
+			$tmp_name = time().'_'.'u_'.$this->cuid;
+			$src_file="tmpimgs/".$tmp_name.'.'.$ext; 
             if(move_uploaded_file($_FILES['uploadfile']['tmp_name'],$src_file)){
                 $src_img = $src_file;
-                $result = $this->Thumbnail->createThumb($src_img,$file_type,$dst_file_name,$thumb_type);
+                $result = $this->Thumbnail->createUserThumbs($src_img,$file_type,$dst_file_name,$upload_path);
                 if ($result==true) {	
                 	$this->Session->setFlash('头像上传成功！');
+                	$this->User->id = $this->cuid;
+                	$this->User->saveField('avatar',$dst_file_name.'.jpg');
                 	$this->redirect('/settings');
                 }else{
                 	$this->Session->setFlash($result);
                 	$this->redirect('/users/upload_avatar');
-                }
+               }
             }else{
                 echo "Failed to upload file Contact Site admin to fix the problem";
                 exit;
@@ -147,6 +146,19 @@ class UsersController extends AppController {
 		}
 		$notes = $this->Note->find('all',array('conditions'=>array('Note.user_id'=>$this->uid),'order'=>'Note.created desc','limit'=>5));
 		$guests=$this->Guest->find('all',array('conditions'=>array('Guest.user_id'=>$this->uid),'order'=>'Guest.id desc','limit'=>5));
+		$this->paginate= array(
+			'limit'=>12,
+			"joins"=>array(array(
+			'table'=>'followships',
+			'alias'=>'Followship',
+			'conditions'=>array("User.id = Followship.following_id")			
+			)),
+			'order'=>'Followship.id desc'
+			);
+		$followers_count = $this->Followship->find('count',array('conditions'=>array('Followship.following_id'=>$this->uid)));
+		$followings = $this->paginate('User',array('Followship.user_id'=>$this->uid));
+		$this->set('followers_count', $followers_count);
+		$this->set('followings',$followings);
 		$this->set('guests', $guests);
 		$this->set('user', $this->user);
 		$this->set('notes',$notes);

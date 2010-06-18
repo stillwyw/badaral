@@ -16,7 +16,7 @@
 		<tr><td>登录邮箱：</td><td>更改</td></tr>
 		<tr><td>密码：</td><td>更改</td></tr>
 		<tr><td>头像：</td><td>
-			<?php echo $this->Avatar->show($cuid) ?>
+			<?php echo $this->Avatar->userAvatar($current_user) ?>
 			<?php echo $html->link('更改', '/users/upload_avatar') ?>
 		</td></tr>
 		<tr><td><?php echo $this->Form->end(__('Submit', true));?>

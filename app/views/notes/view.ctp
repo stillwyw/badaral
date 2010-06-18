@@ -18,7 +18,7 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('User'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Html->link($note['User']['username'], array('controller' => 'users', 'action' => 'view', $note['User']['id'])); ?>
+			<?php echo $this->Avatar->userLink($note); ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Status'); ?></dt>
@@ -53,7 +53,7 @@
 		<td><?php echo $noteComment['NoteComment']['body']; ?>&nbsp;</td>
 		<td><?php echo $noteComment['NoteComment']['created']; ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($noteComment['User']['username'], array('controller' => 'users', 'action' => 'view', $noteComment['User']['id'])); ?>
+			<?php echo $this->Avatar->userLink($noteComment); ?>
 		</td>
 
 		<td class="actions">

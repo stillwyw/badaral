@@ -23,7 +23,7 @@
     	} ?> </li>
     	<li><?php echo $html->link('小组', '/groups') ?> </li>
     	<li><?php if(isset($current_user)){
-    		echo $html->link($current_user['User']['username'], '/settings'); 
+    		echo $html->link($current_user['User']['username'].'设置', '/settings'); 
     		} ?> </li>
     	<li><?php echo $html->link('活动', '/events') ?></li>
     	<li><?php if(isset($current_user)){

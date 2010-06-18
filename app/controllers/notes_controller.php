@@ -4,7 +4,7 @@ class NotesController extends AppController {
 	var $name = 'Notes';
 	var $uses = array('User','Note','NoteComment');
 	var $components = array('Session');
-	var $helpers = array('NoteLink');
+	var $helpers = array('NoteLink','Avatar');
 	var $paginate=array(
 			'limit'=>1
 		);
@@ -47,7 +47,7 @@ class NotesController extends AppController {
 		if (!empty($this->data)) {
 			$this->Note->create();
 			if ($this->Note->save($this->data)) {
-				$this->Note->saveField('user_id',$this->current_user_id);
+		//		$this->Note->saveField('user_id',$this->current_user_id);
 		//		$this->Session->setFlash(__('', true));
 				$this->redirect(array('action' => 'view',$this->Note->id));
 			} else {
