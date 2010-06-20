@@ -2,7 +2,7 @@
 class UsersController extends AppController {
 
 	var $name = 'Users';
-	var $components = array('Session','Cookie','Thumbnail');
+	var $components = array('Session','Cookie','Thumbnail','Email');
 	var $uses = array('User','Guest','Group','Note');
 	var $helpers = array('Avatar');
 	
@@ -39,6 +39,12 @@ class UsersController extends AppController {
  				if($this->User->save($this->data)){
  					$this->User->saveField('uid',"u{$this->User->id}");
 	 				if($this->Auth->login($this->data)){
+	 				    if($this->_sendMail($this->User->id)){
+	 				        $this->Session->setFlash('email sent');
+	 				    }else{
+   	 				        $this->Session->setFlash('email not sent');
+	 				    }
+	 				    
 						$this->redirect("home"); 					
 	 				}else{
                                      	}
@@ -164,17 +170,6 @@ class UsersController extends AppController {
 		$this->set('notes',$notes);
 	}
 
-	function add() {
-		if (!empty($this->data)) {
-			$this->User->create();
-			if ($this->User->save($this->data)) {
-				$this->Session->setFlash(__('The user has been saved', true));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.', true));
-			}
-		}
-	}
 
 	function edit($id = null) {
 		if (!isset($this->cuid)) {
@@ -206,5 +201,57 @@ class UsersController extends AppController {
 		$this->Session->setFlash(__('User was not deleted', true));
 		$this->redirect(array('action' => 'index'));
 	}
+	
+	function sendMails()
+	{
+	    $user = $this->User->find(10);
+        
+        /* Set delivery method */
+
+        /* SMTP Options */
+        $this->Email->smtpOptions = array(
+                'request' => array('uri' => array('scheme' => 'https')),
+                'port'=>'587', 
+                'timeout'=>'60',
+                'host' => 'smtp.gmail.com',
+                'username'=>'stillwyw@gmail.com',
+                'password'=>'still5612',
+           //     'client' => 'smtp_helo_hostname'
+        );
+        $this->Email->delivery = 'smtp';        
+
+        $this->Email->to = '<75166824@qq.com>';
+        $this->Email->subject = '你好！';
+        $this->Email->from = '<stillwyw@gmail.com>';
+        $this->Email->send();
+        $this->set('smtp_errors', $this->Email->smtpError);
+ 
+	}
+	
+    public function _sendMail($id){
+        $user = $this->User->find($id);
+        
+        /* Set delivery method */
+        $this->Email->delivery = 'smtp';        
+
+        /* SMTP Options */
+        $this->Email->smtpOptions = array(
+                'port'=>'25', 
+                'timeout'=>'60',
+                'host' => 'smtp.163.com',
+                'username'=>'stillwyw',
+                'password'=>'iknowyou',
+           //     'client' => 'smtp_helo_hostname'
+        );
+        
+        $this->Email->to = $user['User']['email'];
+        $this->Email->subject = '你好！';
+       // $this->Email->from = 'still@gmail.com';
+        $is_done = $this->Email->send();
+        $this->set('smtp_errors', $this->Email->smtpError);
+        return $is_done;
+        
+    }
+ 
 }
 ?>

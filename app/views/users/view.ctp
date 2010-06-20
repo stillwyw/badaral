@@ -89,11 +89,15 @@
 				<?php echo $user['User']['created']; ?>
 				&nbsp;
 			</li>
-			<?php if (!$own and empty($is_followed)): ?>
+			<?php if (!$own): ?>
+			    
+			<?php if (empty($is_followed)): ?>
 				<li> <?php echo $html->link('【加关注】', "/followships/add/{$uid}") ?></li>
 				<?php else: ?>
 					已关注。 <?php echo $html->link('【取消关注】', "/followships/delete/{$uid}") ?>
 			<?php endif ?>
+			<?php endif ?>
+
 		</ull>
 	</div>
 	<div id="friends">
