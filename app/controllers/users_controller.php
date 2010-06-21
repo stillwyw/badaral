@@ -2,7 +2,7 @@
 class UsersController extends AppController {
 
 	var $name = 'Users';
-	var $components = array('Session','Cookie','Thumbnail','Email');
+	var $components = array('Session','Cookie','Thumbnail','Emailer');
 	var $uses = array('User','Guest','Group','Note');
 	var $helpers = array('Avatar');
 	
@@ -38,6 +38,7 @@ class UsersController extends AppController {
 	 			$this->User->create();
  				if($this->User->save($this->data)){
  					$this->User->saveField('uid',"u{$this->User->id}");
+ 					$this->User->saveField('activate_code',String::uuid());
 	 				if($this->Auth->login($this->data)){
 	 				    if($this->_sendMail($this->User->id)){
 	 				        $this->Session->setFlash('email sent');
@@ -53,6 +54,23 @@ class UsersController extends AppController {
                     $this->data['User']['password_confirm']='';
                     $this->Session->setFlash('something wrong!');
 				}
+ 			}
+ 		}
+ 	}
+ 	
+ 	function activate($code=null,$id=null)
+ 	{
+ 		if ($code) {
+ 			$user = $this->User->findByActivateCode($code);
+ 			if (!empty($user)) {	
+ 				$this->User->id = $user['User']['id'];
+ 				$this->User->saveField('activate_code','');
+ 				$this->User->saveField('active',1);
+ 				if($this->Auth->login($user)){
+ 					$this->redirect("home");
+ 				}
+ 			}else{
+ 				$this->Session->setFlash('激活码无效或已过期！请重新注册！');
  			}
  		}
  	}
@@ -204,27 +222,23 @@ class UsersController extends AppController {
 	
 	function sendMails()
 	{
-	    $user = $this->User->find(10);
+	    ///$user = $this->User->find(10);
         
         /* Set delivery method */
 
         /* SMTP Options */
-        $this->Email->smtpOptions = array(
-                'request' => array('uri' => array('scheme' => 'https')),
-                'port'=>'587', 
-                'timeout'=>'60',
-                'host' => 'smtp.gmail.com',
-                'username'=>'stillwyw@gmail.com',
-                'password'=>'still5612',
-           //     'client' => 'smtp_helo_hostname'
-        );
-        $this->Email->delivery = 'smtp';        
-
-        $this->Email->to = '<75166824@qq.com>';
-        $this->Email->subject = '你好！';
-        $this->Email->from = '<stillwyw@gmail.com>';
-        $this->Email->send();
-        $this->set('smtp_errors', $this->Email->smtpError);
+		//$this->Emailer->template = 'email/confirm'; 
+        // You can use customised thmls or the default ones you setup at the start 
+        
+        //$this->set('data', $data); 
+        $this->Emailer->to = '75166824@qq.com'; 
+        $this->Emailer->subject = 'your new account'; 
+        
+        
+        //$this->Email->attach($fully_qualified_filename, optionally $new_name_when_attached); 
+        // You can attach as many files as you like. 
+        
+        $result = $this->Emailer->send(); 
  
 	}
 	
