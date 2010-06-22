@@ -153,7 +153,7 @@ class GroupsController extends AppController {
                 	$this->Session->setFlash('头像上传成功！');
                 	$this->Group->id = $this->cgid;
                 	$this->Group->saveField('avatar',$dst_file_name.'.'.$ext);
-                	$this->redirect("/group/$this->cggid/manage");
+                	$this->redirect("/group/$this->cggid");
                 }else{
                 	$this->Session->setFlash($result);
                 	$this->redirect("/group/$this->cggid/upload_avatar");

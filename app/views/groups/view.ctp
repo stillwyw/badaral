@@ -11,10 +11,10 @@ var wuc_chatroom = new WUCChatroom(
 
 <div class="left">
 	<div class="groupview">
-		<h2><?php  __('Group');?></h2>
 		<dl><?php $i = 0; $class = ' class="altrow"';?>
 	
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $avatar->groupLink($group); ?>
 				<h3><?php echo $group['Group']['name'] ,'小组'; ?></h3> 创建于：<?php echo $group['Group']['created']; ?>
 				&nbsp;
 			</dd>
@@ -39,19 +39,21 @@ var wuc_chatroom = new WUCChatroom(
 			</dd>
 		</dl>
 		<?php if ($group_role!=null && ($group_role == GroupMembership::member || $group_role == GroupMembership::manager )): ?>
-			我是小组成员 <?php echo $html->link('退出小组', "/group/{$gid}/quit") ?>
+			我是小组成员 <?php echo $html->link('退出小组', "/group/{$ggid}/quit") ?>
 			
 		<?php elseif ($group_role !=null && $group_role==GroupMembership::admin): ?>
 			我是小组组长
 			<?php else: ?>
-				<?php echo $html->link('加入该小组', "/group/{$gid}/join") ?>
+				<?php echo $html->link('加入该小组', "/group/{$ggid}/join") ?>
 	
 		<?php endif ?>
 	
 	</div>
 <div id="event">
 	<h3>小组最新活动</h3>
+	
 		<ul>
+		    <li><?php echo $html->link('创建新活动', "/group/{$ggid}/new_event") ?>
 	<?php foreach ($events as $event): ?>
 			<li>[地点]<?php echo $html->link($event['Event']['name'], array('controller' => 'events','action'=>'view',$event['Event']['id'])) ?>[<?php echo $event['Event']['begins'] ?>]</li>
 	<?php endforeach ?>
@@ -83,7 +85,7 @@ var wuc_chatroom = new WUCChatroom(
 
 	<p>
 	<?php
-	$paginator->options(array('url' => "../../group/{$gid}/"));
+	$paginator->options(array('url' => "../../group/{$ggid}/"));
 	echo $this->Paginator->counter(array(
 	'format' => __('第 %page% / %pages% 页,  %current% / %count% 条目, 第 %start%到 %end% 条', true)
 	));
@@ -109,15 +111,15 @@ var wuc_chatroom = new WUCChatroom(
 		<div id="members">
 			<h3>小组成员</h3>
 			<?php foreach ($members as $member): ?>
-				<?php echo $html->link($member['User']['username'], "/people/{$member['User']['uid']}") ?>
+				<?php echo $avatar->userLink($member) ?>
 			<?php endforeach ?>
 		</div>
 	<div class="actions">
 		<h3><?php __('Actions'); ?></h3>
 		<ul>
-			<li><?php echo $this->Html->link(__('小组管理', true), "/group/{$gid}/manage"); ?> </li>
-			<li><?php echo $this->Html->link(__('返回我的小组', true), "/group"); ?> </li>
-			<li><?php echo $this->Html->link(__('添加新讨论', true), "/group/{$gid}/post/new"); ?> </li>
+			<li><?php echo $this->Html->link(__('小组管理', true), "/group/{$ggid}/manage"); ?> </li>
+			<li><?php echo $this->Html->link(__('返回我的小组', true), "/groups"); ?> </li>
+			<li><?php echo $this->Html->link(__('添加新讨论', true), "/group/{$ggid}/post/new"); ?> </li>
 		</ul>
 	</div>
 
