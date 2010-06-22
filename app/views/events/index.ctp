@@ -7,6 +7,9 @@
 			<th><?php echo $this->Paginator->sort('created');?></th>
 			<th><?php echo $this->Paginator->sort('updated');?></th>
 			<th><?php echo $this->Paginator->sort('description');?></th>
+			<th><?php echo $this->Paginator->sort('group_id');?></th>
+			<th><?php echo $this->Paginator->sort('begins');?></th>
+			<th><?php echo $this->Paginator->sort('ends');?></th>
 			<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -23,6 +26,9 @@
 		<td><?php echo $event['Event']['created']; ?>&nbsp;</td>
 		<td><?php echo $event['Event']['updated']; ?>&nbsp;</td>
 		<td><?php echo $event['Event']['description']; ?>&nbsp;</td>
+		<td><?php echo $event['Event']['group_id']; ?>&nbsp;</td>
+		<td><?php echo $event['Event']['begins']; ?>&nbsp;</td>
+		<td><?php echo $event['Event']['ends']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $event['Event']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $event['Event']['id'])); ?>

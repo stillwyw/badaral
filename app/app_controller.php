@@ -24,6 +24,7 @@ class AppController extends Controller {
 
 		// current user
 		if($this->Auth->user()){
+			$this->User->recursive=0;
 			$this->current_user = $this->Auth->user();
 			$this->current_user = $this->User->findById($this->current_user['User']['id']);
 			$this->cuid = $this->current_user['User']['id'];
@@ -50,11 +51,14 @@ class AppController extends Controller {
 		}
 		// group stuffs
 		if(isset($this->params['gid'])){
+			$this->Group->recursive=0;
 			$group = $this->Group->findByGid($this->params['gid']);
 			$this->current_group = $group;
 			$this->cgid = $group['Group']['id'];
 			$this->cggid = $group['Group']['gid'];
-			$this->set('gid',$this->params['gid']);
+			$this->set('gid',$this->current_group['Group']['id']);
+			$this->set('group',$group);
+			$this->set('ggid',$this->params['gid']);
 		}
 		// ownership
 		if (isset($this->cuid)&&isset($this->uid)) {

@@ -6,6 +6,9 @@
 		echo $this->Form->input('id');
 		echo $this->Form->input('name');
 		echo $this->Form->input('description');
+		echo $this->Form->hidden('group_id',array('value'=>$gid));
+		echo $this->Form->input('begins');
+		echo $this->Form->input('ends');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>

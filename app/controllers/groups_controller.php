@@ -2,8 +2,9 @@
 class GroupsController extends AppController {
 
 	var $name = 'Groups';
-	var $uses = array('GroupPost','Group','User','GroupMembership');
-	var $components = array('Session');
+	var $uses = array('GroupPost','Group','User','GroupMembership','Event');
+	var $components = array('Session','Security','Thumbnail');
+	var $helpers = array('Avatar');
 	var $paginate=array(
 			'limit'=>4,
 			'order'=>array('GroupPost.created desc')
@@ -47,6 +48,11 @@ class GroupsController extends AppController {
 
 	function view($gid = null) {
 		$group = $this->current_group;
+		$events = $this->Event->find('all',array(
+			'limit'=>5,
+			'order'=>'Event.id desc',
+			'conditions'=>array('Event.group_id'=>$this->cgid)
+			));
 		$group_id = $this->cgid;
 		if (!isset($group)&&!$group) {
 			$this->Session->setFlash(__('Invalid group', true));
@@ -61,6 +67,7 @@ class GroupsController extends AppController {
 				'conditions'=>array("GroupMembership.group_id"=>$this->cgid, "GroupMembership.role <>"=>GroupMembership::blocked)
 				));
 		$members = $this->User->find('all',array('conditions'=>array('User.id '=>$memberShips),'limit'=>10,'order'=>'id desc'));
+		$this->set('events', $events);
 		$this->set('members',$members);
 		$this->set('group', $this->current_group);
 		$this->set('posts',$this->paginate('GroupPost',array("GroupPost.group_id "=>$group_id)));
@@ -111,6 +118,51 @@ class GroupsController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->current_group;
 		}
+	}
+	function upload_avatar()
+	{
+		$upload_path = Group::avatar_path.'/'; #'a_path' 格式！！记得加 /
+		
+		
+		if (isset($this->cgid)) {
+			$dst_file_name = "g_{$this->cgid}";
+		}else{
+			$this->Session->setFlash('something  cuid wrong!');
+			$this->redirect('/users/upload_avatar');
+
+		}
+	    if(isset($_FILES['uploadfile'])){
+           $file_type = $_FILES['uploadfile']['type'];	
+           $file_size  = $_FILES['uploadfile']['size'];
+           if (!in_array($file_type,$this->Thumbnail->allow_type_list)){
+           		$this->Session->setFlash('只允许上传 gif jpeg png等图片格式的文件！');
+           		$this->redirect("/group/$cggid/upload_avatar");
+           }
+           if($file_size>$this->Thumbnail->max_file_size){
+           		$this->Session->setFlash('上传图片不得超过500K');
+           		$this->redirect("/group/$this->cggid/upload_avatar");
+           }
+           
+			$ext = end(explode('.',$_FILES['uploadfile']['name']));
+			$tmp_name = time().'_'.'g_'.$this->cgid;
+			$src_file="tmpimgs/".$tmp_name.'.'.$ext; 
+            if(move_uploaded_file($_FILES['uploadfile']['tmp_name'],$src_file)){
+                $src_img = $src_file;
+                $result = $this->Thumbnail->createGroupThumb($src_img,$file_type,$dst_file_name,$upload_path);
+                if ($result==true) {	
+                	$this->Session->setFlash('头像上传成功！');
+                	$this->Group->id = $this->cgid;
+                	$this->Group->saveField('avatar',$dst_file_name.'.'.$ext);
+                	$this->redirect("/group/$this->cggid/manage");
+                }else{
+                	$this->Session->setFlash($result);
+                	$this->redirect("/group/$this->cggid/upload_avatar");
+               }
+            }else{
+                echo "Failed to upload file Contact Site admin to fix the problem";
+                exit;
+            }
+		}		
 	}
 
 	function delete($id = null) {

@@ -21,7 +21,7 @@ class EventsController extends AppController {
 			$this->Event->create();
 			if ($this->Event->save($this->data)) {
 				$this->Session->setFlash(__('The event has been saved', true));
-				$this->redirect(array('action' => 'index'));
+				$this->redirect("/group/$this->cggid/");
 			} else {
 				$this->Session->setFlash(__('The event could not be saved. Please, try again.', true));
 			}

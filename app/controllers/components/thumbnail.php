@@ -15,6 +15,14 @@ class ThumbnailComponent extends Object {
 		$res += $this->createThumb($src_img,$src_img_type,$dst_img_name.'_m',$upload_path,$m_w,$m_h);
 		return $res;
 	}
+	
+	public function createGroupThumb($src_img,$src_img_type,$dst_img_name,$upload_path)
+	{
+		$s_h=50;
+		$s_w=50;
+		$res = $this->createThumb($src_img,$src_img_type,$dst_img_name,$upload_path,$s_w,$s_h);
+		return $res;
+	}
 	public function createThumb($src_img,$src_img_type,$dst_img_name,$upload_path,$dst_w,$dst_h)
 	{
 		list($src_w,$src_h)=getimagesize($src_img);  // 获取原图尺寸

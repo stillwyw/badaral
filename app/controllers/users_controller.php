@@ -2,18 +2,21 @@
 class UsersController extends AppController {
 
 	var $name = 'Users';
-	var $components = array('Session','Cookie','Thumbnail','Emailer');
+	var $components = array('Session','Cookie','Thumbnail','Emailer','Security');
 	var $uses = array('User','Guest','Group','Note');
 	var $helpers = array('Avatar');
 	
 	function beforeFilter(){
 	//  $this->Cookie->name = 'baker_id';
 	//  $this->Cookie->time =  3600;  // or '1 hour'
+		if (isset($this->data)) {
+			$this->Security->requirePost(array('upload_avatar'));
+		}
 		$this->Cookie->path = '/'; 
 	//  $this->Cookie->domain = 'example.com';   
 		$this->Cookie->secure = false;  //i.e. only sent if using secure HTTPS
 		$this->Cookie->key = 'qSI232qs*&sXOw!';
-		$this->Auth->allow('login','logout','signup');
+		$this->Auth->allow('login','logout','signup','upload_avatar');
 		parent::beforeFilter();
 
 
@@ -126,7 +129,7 @@ class UsersController extends AppController {
 			$dst_file_name = "u_{$this->cuid}";
 		}else{
 			$this->Session->setFlash('something  cuid wrong!');
-			$this->redirect('/users/upload_avatar');
+			$this->redirect('/login');
 
 		}
 	    if(isset($_FILES['uploadfile'])){

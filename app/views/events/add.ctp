@@ -1,10 +1,13 @@
 <div class="events form">
-<?php echo $this->Form->create('Event');?>
+<?php echo $this->Form->create('Event',array('url'=>"/group/$ggid/new_event"));?>
 	<fieldset>
- 		<legend><?php __('Add Event'); ?></legend>
+ 		<legend><?php __("在{$group['Group']['name']}小组创建新活动"); ?></legend>
 	<?php
 		echo $this->Form->input('name');
 		echo $this->Form->input('description');
+		echo $this->Form->hidden('group_id',array('value'=>$gid));
+		echo $this->Form->input('begins');
+		echo $this->Form->input('ends');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>

@@ -3,10 +3,12 @@
 	<fieldset>
  		<legend><?php __('Edit Group'); ?></legend>
 	<?php
+		
 		echo $this->Form->input('name');
 		echo $this->Form->input('desc');
 
 	?>
+	<?php echo $html->link('更改', "/group/$gid/new_avatar") ?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>
 </div>

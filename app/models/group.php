@@ -6,6 +6,8 @@ class Group extends AppModel {
 	const manager = 1;
 	const member = 0;
 	
+	const avatar_path = 'g_thumb';
+	
 	var $validate = array(
 		'name' => array(
 			'notempty' => array(
@@ -48,7 +50,12 @@ class Group extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
-		)
+		),
+		'Event' => array(
+			'className' => 'Event',
+			'foreignKey' => 'group_id',
+			'dependent' => false
+			)
 	);
 	
 	

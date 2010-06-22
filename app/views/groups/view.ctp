@@ -49,7 +49,16 @@ var wuc_chatroom = new WUCChatroom(
 		<?php endif ?>
 	
 	</div>
+<div id="event">
+	<h3>小组最新活动</h3>
+		<ul>
+	<?php foreach ($events as $event): ?>
+			<li>[地点]<?php echo $html->link($event['Event']['name'], array('controller' => 'events','action'=>'view',$event['Event']['id'])) ?>[<?php echo $event['Event']['begins'] ?>]</li>
+	<?php endforeach ?>
+		</ul>
+</div>
 <div class="related">
+	<h3>小组话题 。。。。</h3>
 	<?php if (!empty($group['GroupPost'])):?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>

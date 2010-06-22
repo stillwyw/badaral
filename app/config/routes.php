@@ -32,6 +32,8 @@
 	Router::connect('/group/:gid/join',array('controller'=>'group_memberships','action'=>'join'));
 	Router::connect('/group/:gid/quit',array('controller'=>'group_memberships','action'=>'quit'));
     Router::connect('/group/:gid/manage',array('controller'=>'groups','action'=>'edit'));
+    Router::connect('/group/:gid/new_avatar',array('controller'=>'groups','action'=>'upload_avatar'));
+    Router::connect('/group/:gid/new_event',array('controller'=>'events','action'=>'add'));
     Router::connect('/group/:gid/post/new',array('controller'=>'group_posts','action'=>'add'));
     Router::connect('/group/:gid/*',array('controller'=>'groups','action'=>'view'),array('pass'=>array('gid','page')));
 
