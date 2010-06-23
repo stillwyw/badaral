@@ -15,6 +15,17 @@ class EventsController extends AppController {
 		}
 		$this->set('event', $this->Event->read(null, $id));
 	}
+	
+	function group($ggid = null){
+		if ($ggid = null) {
+			$this->redirect('/');
+		}
+		$this->paginate = array(
+				'limit'=>20,
+				'order'=> 'id desc'
+					);
+		$this->set('events', $this->paginate('Event',array('Event.group_id'=>$this->cgid)) );	
+	}
 
 	function add() {
 		if (!empty($this->data)) {

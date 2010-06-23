@@ -1,8 +1,11 @@
+<?php echo $session->flash() ?>
 <div class="groupPosts form">
-<?php echo $this->Form->create('GroupPost',array('url'=>"/group/{$gid}/post/new"));?>
+<?php echo $this->Form->create('GroupPost',array('url'=>"/group/{$ggid}/post/new"));?>
 	<fieldset>
  		<legend><?php __('Add Group Post'); ?></legend>
 	<?php
+		echo $form->hidden('user_id',array('value'=>$cuid));
+		echo $form->hidden('group_id',array('value'=>$gid));
 		echo $this->Form->input('title');
 		echo $this->Form->input('body');
 	?>

@@ -36,7 +36,8 @@ class User extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 			'isUnique' => array(
-				'rule'=> array('isUnique')	
+				'rule'=> array('isUnique'),
+				'message'=>'该邮箱已存在。'
 			)			
 		),
 		'uid' => array(
@@ -48,8 +49,10 @@ class User extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+
 			'isUnique' => array(
-				'rule'=> array('isUnique')	
+				'rule'=> array('isUnique'),
+				'message'=>"该uid已存在，请重新选择。"
 			)
 		),
 	);
@@ -78,10 +81,17 @@ class User extends AppModel {
 		)
 	);
 
-// virtual fields 
-var $virtualFields = array(
-  //  'uid_or_id' => "User.uid || User.id"
-);
+	// virtual fields 
+	var $virtualFields = array(
+	  //  'uid_or_id' => "User.uid || User.id"
+	);
+	function notUStarted($check)
+	{
+		$value = array_values($check);      
+		$value = $value[0];
+		return !preg_match('/^[u][\d]+$/',$value);
+	}
+
 
 
 }

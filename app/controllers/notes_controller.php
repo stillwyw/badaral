@@ -4,14 +4,13 @@ class NotesController extends AppController {
 	var $name = 'Notes';
 	var $uses = array('User','Note','NoteComment');
 	var $components = array('Session');
-	var $helpers = array('NoteLink','Avatar');
+	var $helpers = array('NoteLink','Avatar','Format');
 	var $paginate=array(
 			'limit'=>1
 		);
 		
 	function beforeFilter()
 	{
-		parent::beforeFilter();
 		parent::beforeFilter();
 		if (empty($this->passedArgs) || !isset($this->passedArgs['0'])) {
 				$note_id = false;
@@ -47,8 +46,6 @@ class NotesController extends AppController {
 		if (!empty($this->data)) {
 			$this->Note->create();
 			if ($this->Note->save($this->data)) {
-		//		$this->Note->saveField('user_id',$this->current_user_id);
-		//		$this->Session->setFlash(__('', true));
 				$this->redirect(array('action' => 'view',$this->Note->id));
 			} else {
 				$this->Session->setFlash(__('The note could not be saved. Please, try again.', true));
@@ -70,7 +67,7 @@ class NotesController extends AppController {
 		if (!empty($this->data)) {
 			if ($this->Note->save($this->data)) {
 				$this->Session->setFlash(__('The note has been saved', true));
-				$this->redirect("/people/{$this->uid}/diary");
+				$this->redirect("/notes/view/{$this->Note->id}");
 			} else {
 				$this->Session->setFlash(__('The note could not be saved. Please, try again.', true));
 			}

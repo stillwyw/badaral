@@ -61,7 +61,6 @@ var wuc_chatroom = new WUCChatroom(
 </div>
 <div class="related">
 	<h3>小组话题 。。。。</h3>
-	<?php if (!empty($group['GroupPost'])):?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php __('标题'); ?></th>
@@ -81,7 +80,6 @@ var wuc_chatroom = new WUCChatroom(
 		</tr>
 	<?php endforeach; ?>
 	</table>
-<?php endif; ?>
 
 	<p>
 	<?php

@@ -1,34 +1,12 @@
 <div class="notes view">
 <h2><?php  __('Note');?></h2>
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $note['Note']['id']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Title'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $note['Note']['title']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Body'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $note['Note']['body']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('User'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Avatar->userLink($note); ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Status'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $note['Note']['status']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $note['Note']['created']; ?>
+			<?php echo $format->text($note['Note']['body']); ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Updated'); ?></dt>
@@ -50,7 +28,7 @@
 	?>
 	<tr<?php echo $class;?>>
 		<td><?php echo $noteComment['NoteComment']['id']; ?>&nbsp;</td>
-		<td><?php echo $noteComment['NoteComment']['body']; ?>&nbsp;</td>
+		<td><?php echo $format->text($noteComment['NoteComment']['body']); ?>&nbsp;</td>
 		<td><?php echo $noteComment['NoteComment']['created']; ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Avatar->userLink($noteComment); ?>

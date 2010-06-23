@@ -8,7 +8,7 @@
 		<tr><td>称号：</td><td><?php echo $this->Form->text('username') ?></td></tr>
 		<tr><td>用户id：</td><td>
 			<?php if ($this->data['User']['uid']=="u{$this->data['User']['id']}"): ?>
-				<?php echo $this->Form->text('uid') ?> （用户id为用户唯一标识，一旦设置便不能更改。）
+				<?php echo $this->Form->text('uid',array('value'=>'')) ?> （用户id为用户唯一标识，一旦设置便不能更改。）
 				<?php else: ?>
 					<?php echo $cuuid ?>
 			<?php endif ?>

@@ -2,16 +2,14 @@
 class UsersController extends AppController {
 
 	var $name = 'Users';
-	var $components = array('Session','Cookie','Thumbnail','Emailer','Security');
+	var $components = array('Session','Cookie','Thumbnail','Emailer');
 	var $uses = array('User','Guest','Group','Note');
 	var $helpers = array('Avatar');
 	
 	function beforeFilter(){
 	//  $this->Cookie->name = 'baker_id';
 	//  $this->Cookie->time =  3600;  // or '1 hour'
-		if (isset($this->data)) {
-			$this->Security->requirePost(array('upload_avatar'));
-		}
+
 		$this->Cookie->path = '/'; 
 	//  $this->Cookie->domain = 'example.com';   
 		$this->Cookie->secure = false;  //i.e. only sent if using secure HTTPS
@@ -43,13 +41,13 @@ class UsersController extends AppController {
  					$this->User->saveField('uid',"u{$this->User->id}");
  					$this->User->saveField('activate_code',String::uuid());
 	 				if($this->Auth->login($this->data)){
-	 				    if($this->_sendMail($this->User->id)){
+	 			/*	    if($this->_sendMail($this->User->id)){
 	 				        $this->Session->setFlash('email sent');
 	 				    }else{
    	 				        $this->Session->setFlash('email not sent');
-	 				    }
+	 				    }*/
 	 				    
-						$this->redirect("home"); 					
+						//$this->redirect("home"); 					
 	 				}else{
                                      	}
  				}else{
@@ -199,6 +197,16 @@ class UsersController extends AppController {
 		}
 		if (!empty($this->data)) {
 			$this->User->id = $this->cuid;
+			$the_uid = $this->data['User']['uid'];
+			if ($the_uid!=$this->cuuid) {
+				if (preg_match('/^[u][\d]+$/',$the_uid)) {
+					$this->Session->setFlash('uid不可以为u开头后面为数字的形式。');
+					$this->redirect('/settings');
+				}
+			}
+			if($the_uid=='') {
+				$this->data['User']['uid']=$this->cuuid;
+			}
 			if ($this->User->save($this->data)) {
 				$this->Session->setFlash(__('修改用户信息成功！', true));
 				$this->redirect('/settings');

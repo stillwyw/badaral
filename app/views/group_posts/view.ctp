@@ -3,7 +3,7 @@
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('User'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Html->link($groupPost['User']['username'], array('controller' => 'users', 'action' => 'view', $groupPost['User']['id'])); ?>
+			<?php echo $avatar->userLink($groupPost)?>
 			&nbsp;
 		</dd>
 
@@ -14,7 +14,7 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Body'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $groupPost['GroupPost']['body']; ?>
+			<?php echo $format->text($groupPost['GroupPost']['body']); ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>

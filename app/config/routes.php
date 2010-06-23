@@ -34,9 +34,9 @@
     Router::connect('/group/:gid/manage',array('controller'=>'groups','action'=>'edit'));
     Router::connect('/group/:gid/new_avatar',array('controller'=>'groups','action'=>'upload_avatar'));
     Router::connect('/group/:gid/new_event',array('controller'=>'events','action'=>'add'));
+	Router::connect('/group/:gid/events',array('controller'=>'events','action'=>'group'));
     Router::connect('/group/:gid/post/new',array('controller'=>'group_posts','action'=>'add'));
     Router::connect('/group/:gid/*',array('controller'=>'groups','action'=>'view'),array('pass'=>array('gid','page')));
-
 
 	Router::connect('/people/:uid',array('controller'=>'users','action'=>'view'));
 	Router::connect('/people/:uid/diary/*', array('controller'=>'notes','action'=>'index'));

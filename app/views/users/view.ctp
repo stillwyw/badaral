@@ -23,8 +23,8 @@
 		<td><?php echo $note['Note']['created']; ?>&nbsp;</td>
 		<td><?php echo $note['Note']['updated']; ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $note['Note']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $note['Note']['id'])); ?>
+			<?php echo $this->Html->link(__('View', true), "/notes/view/{$note['Note']['id']}"); ?>
+			<?php echo $this->Html->link(__('Edit', true), "/notes/edit/{$note['Note']['id']}"); ?>
 			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $note['Note']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $note['Note']['id'])); ?>
 		</td>
 	</tr>
