@@ -103,8 +103,7 @@ class GroupsController extends AppController {
 					echo $this->role;
 
 		if (!isset($this->role)) {
-			$this->Session->setFlash(__('您无权访问该页面。', true));
-			$this->redirect(array('action' => 'index'));
+		    $this->cakeError("access");
 		}
 		if (!empty($this->data)) {
 			$this->Group->id=$this->current_group_id;

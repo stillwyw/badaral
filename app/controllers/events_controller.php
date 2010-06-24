@@ -2,7 +2,8 @@
 class EventsController extends AppController {
 
 	var $name = 'Events';
-
+	var $uses = array('Event','EventUser');
+    
 	function index() {
 		$this->Event->recursive = 0;
 		$this->set('events', $this->paginate());
@@ -13,7 +14,17 @@ class EventsController extends AppController {
 			$this->Session->setFlash(__('Invalid event', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('event', $this->Event->read(null, $id));
+		//$this->Event->recursive=0;
+		$event = $this->Event->read(null, $id);
+		$role = $this->EventUser->find('first',array('conditions'=>array(
+		    'EventUser.user_id'=>$this->cuid,
+		    'EventUser.event_id'=>$id
+		    )
+    	));
+    	if (!empty($role) {
+    	    $role = $role['EventUser'][]
+    	}
+		$this->set('event', );
 	}
 	
 	function group($ggid = null){
@@ -45,6 +56,42 @@ class EventsController extends AppController {
 			} else {
 				$this->Session->setFlash(__('活动创建失败，请稍后再试！', true));
 			}
+		}
+	}
+	function join($id=null){
+		if(!$id){
+			$this->Session->setFlash("访问出错。");
+			$this->redirect('/events');
+		}
+		$data = array(
+			'EventUser'=>array(
+				'user_id'=>$this->cuid,
+				'event_id'=>$id,
+					'role'=>EventUser::join
+				)
+			);
+		$this->EventUser->create();
+		if($this->EventUser->save($data)){
+			$this->Session->setFlash("参与活动成功。");
+			$this->redirect("/events/view/{$id}");
+		}
+	}
+	function interest($id=null){
+		if(!id){
+			$this->Session->setFlash("访问出错。");
+			$this->redirect('/events');
+		}
+		$data = array(
+			'EventUser'=>array(
+				'user_id'=>$this->cuid,
+				'event_id'=>$id,
+					'role'=>EventUser::join
+				)
+			);
+		$this->EventUser->create();
+		if($this->EventUser->save($date)){
+			$this->Session->setFlash("参与活动成功。");
+			$this->redirect("/events/view/{$id}");
 		}
 	}
 

@@ -2,6 +2,7 @@
 class MessagesController extends AppController {
 
 	var $name = 'Messages';
+	var $helpers =  array('Avatar','Format');
 
 	function index() {
 		$this->Message->recursive = 0;
@@ -18,8 +19,12 @@ class MessagesController extends AppController {
 			$this->Session->setFlash(__('Invalid message', true));
 			$this->redirect(array('action' => 'index'));
 		}
+		
 		$message = $this->Message->read(null,$id);
-		if ($message['Message']['read']==0) {
+		if (empty($message) or ($message['Message']['user_id']!=$this->cuid and $message['Message']['sender_id']!=$this->cuid)) {
+		    $this->cakeError("access");
+		}
+		if ($message['Message']['read']==0 and $message['Message']['user_id']!=$this->cuid) {
 			$this->Message->id = $id;
 			$this->Message->saveField('read',1);
 		}

@@ -69,8 +69,8 @@ class GroupPostsController extends AppController {
 
 	function edit($id = null) {
 		if (!isset($this->post)or!$this->own) {
-			$this->Session->setFlash(__('该页面不存在,或权限不足。', true));
-			$this->redirect("/groups");
+					    $this->cakeError("access");
+
 		}
 		if (!empty($this->data)) {
 			$this->GroupPost->id = $id;
@@ -88,8 +88,8 @@ class GroupPostsController extends AppController {
 
 	function delete($id = null) {
 		if (!isset($this->post)or!$this->own) {
-			$this->Session->setFlash(__('无权进行该操作。', true));
-			$this->redirect("/groups");
+					    $this->cakeError("access");
+
 		}
 		if ($this->GroupPost->delete($id)) {
 			$this->Session->setFlash(__('讨论已删除。', true));
