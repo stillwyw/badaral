@@ -15,6 +15,44 @@ class EventUsersController extends AppController {
 		}
 		$this->set('eventUser', $this->EventUser->read(null, $id));
 	}
+	
+	function join($id=null){
+		if(!id){
+			$this->Session->setFlash("访问出错。");
+			$this->redirect('/events');
+		}
+		$data = array(
+			'EventUser'=>array(
+				'user_id'=>$this->cuid,
+				'event_id'=>$id,
+					'role'=>EventUser::join
+				)
+			);
+		$this->EventUser->create();
+		if($this->EventUser->save($date)){
+			$this->Session->setFlash("参与活动成功。")
+			$this->redirect("/event/view/{$id}");
+		}
+	}
+	function interest($id=null){
+		if(!id){
+			$this->Session->setFlash("访问出错。");
+			$this->redirect('/events');
+		}
+		$data = array(
+			'EventUser'=>array(
+				'user_id'=>$this->cuid,
+				'event_id'=>$id,
+					'role'=>EventUser::join
+				)
+			);
+		$this->EventUser->create();
+		if($this->EventUser->save($date)){
+			$this->Session->setFlash("参与活动成功。")
+			$this->redirect("/event/view/{$id}");
+		}
+	}
+
 
 	function add() {
 		if (!empty($this->data)) {

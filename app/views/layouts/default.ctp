@@ -27,6 +27,7 @@
     		} ?> </li>
     	<li><?php echo $html->link('活动', '/events') ?></li>
     	<li><?php if(isset($current_user)){
+    		echo $html->link('邮箱','/messages');
     		echo $html->link('退出', '/signout') ;
     		} ?> </li>
       </ul>

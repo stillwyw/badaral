@@ -42,6 +42,8 @@
 			&nbsp;
 		</dd>
 	</dl>
+	<?php echo $html->link('[参加]', "/events/join/{$event['Event']['id']}") ?>
+	<?php echo $html->link('[感兴趣]', "/events/interest/{$vent['Event']['id']}") ?>
 </div>
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>

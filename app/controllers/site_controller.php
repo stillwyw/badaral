@@ -5,7 +5,7 @@ class SiteController extends AppController {
 	var $components = array('Session');
 
 	function beforeFilter(){
-		$this->Auth->allow('*');
+		$this->Auth->allow('about');
 		parent::beforeFilter();
 	}
 	function index(){

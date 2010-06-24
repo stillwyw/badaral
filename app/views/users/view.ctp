@@ -90,7 +90,7 @@
 				&nbsp;
 			</li>
 			<?php if (!$own): ?>
-			    
+			    <?php echo $html->link('发站内消息', "/messages/add/{$user['User']['id']}") ?>
 			<?php if (empty($is_followed)): ?>
 				<li> <?php echo $html->link('【加关注】', "/followships/add/{$uid}") ?></li>
 				<?php else: ?>
