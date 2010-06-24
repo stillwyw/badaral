@@ -71,7 +71,7 @@
 	<div class="profile">
 		<ul><?php $i = 0; $class = ' class="altrow"';?>
 			<li<?php if ($i++ % 2 == 0) echo $class;?>>
-				<?php echo $this->Avatar->userAvatar($user,'m'); ?>
+				<?php echo $this->Avatar->userAvatar($user['User'],'m'); ?>
 				&nbsp;
 			</li>
 			<li<?php if ($i % 2 == 0) echo $class;?>><?php __('Username'); ?></li>
@@ -103,7 +103,7 @@
 	<div id="friends">
 	<h3>关注（<?php echo $paginator->counter(array('format'=>'%count%')); ?>）人 / 被(<?php echo $followers_count ?>)人关注</h3>
 	<?php foreach ($followings as $user): ?>
-			<?php echo $this->Avatar->userLink($user) ?>
+			<?php echo $this->Avatar->userLink($user['User']) ?>
 		<?php endforeach ?>	
 	</div>
 	<div id="guest">
@@ -130,7 +130,7 @@
 				?>
 				<tr<?php echo $class;?>>
 					<td>
-						<?php echo $this->Avatar->userLink($guest) ?>
+						<?php echo $this->Avatar->userLink($guest['Sender']) ?>
 					</td>
 					<td><?php echo $guest['Guest']['body']; ?>&nbsp;</td>
 					<td><?php echo $guest['Guest']['created']; ?>&nbsp;</td>

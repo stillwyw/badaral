@@ -3,7 +3,7 @@
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('User'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $avatar->userLink($groupPost)?>
+			<?php echo $avatar->userLink($groupPost['User'])?>
 			&nbsp;
 		</dd>
 

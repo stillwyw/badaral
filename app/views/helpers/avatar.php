@@ -39,11 +39,11 @@ class AvatarHelper extends AppHelper {
 	public function userAvatar($user,$type=null)
 	{
 		$path = User::avatar_path;  # 返回格式是 'a_path'
-	    $userPath = "/people/{$user['User']['uid']}";
-	    if (is_null($user['User']['avatar'])	) {
+	    $userPath = "/people/{$user['uid']}";
+	    if (is_null($user['avatar'])	) {
 	    	$avatar = 'default.jpg';
 	    }else{
-	    	$avatar = $user['User']['avatar'];
+	    	$avatar = $user['avatar'];
 	    }
 	    if (!is_null($type)) {
 	    	list($file_name,$file_type)=explode('.',$avatar);
@@ -55,11 +55,11 @@ class AvatarHelper extends AppHelper {
 	public function userLink($user,$type=null)
 	{
 		$path = User::avatar_path;  # 返回格式是 'a_path'
-	    $userPath = "/people/{$user['User']['uid']}";
-	    if (is_null($user['User']['avatar'])	) {
+	    $userPath = "/people/{$user['uid']}";
+	    if (is_null($user['avatar'])	) {
 	    	$avatar = 'default.jpg';
 	    }else{
-	    	$avatar = $user['User']['avatar'];
+	    	$avatar = $user['avatar'];
 	    }
 	    if (!is_null($type)) {
 	    	list($file_name,$file_type)=explode('.',$avatar);

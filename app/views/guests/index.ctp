@@ -11,12 +11,9 @@
 		}
 	?>
 	<tr<?php echo $class;?>>
-		<td><?php echo $guest['Guest']['id']; ?>&nbsp;</td>
-		<td><?php echo $guest['Guest']['sender_id']; ?>&nbsp;</td>
-		<td>
-			<?php echo $this->Html->link($guest['User']['username'], array('controller' => 'users', 'action' => 'view', $guest['User']['id'])); ?>
-		</td>
-		<td><?php echo $guest['Guest']['body']; ?>&nbsp;</td>
+		<td><?php echo $avatar->userLink($guest['Sender']); ?>&nbsp;</td>
+
+		<td><?php echo $format->text($guest['Guest']['body']); ?>&nbsp;</td>
 		<td><?php echo $guest['Guest']['created']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $guest['Guest']['id'])); ?>

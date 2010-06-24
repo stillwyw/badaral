@@ -2,6 +2,11 @@
 class EventUser extends AppModel {
 	var $name = 'EventUser';
 	var $displayField = 'id';
+	
+	const sponsor = 1;
+	const join = 2;
+	const interest = 3;
+	
 	var $validate = array(
 		'event_id' => array(
 			'numeric' => array(

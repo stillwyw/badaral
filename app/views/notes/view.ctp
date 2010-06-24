@@ -31,7 +31,7 @@
 		<td><?php echo $format->text($noteComment['NoteComment']['body']); ?>&nbsp;</td>
 		<td><?php echo $noteComment['NoteComment']['created']; ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Avatar->userLink($noteComment); ?>
+			<?php echo $this->Avatar->userLink($noteComment['User']); ?>
 		</td>
 
 		<td class="actions">

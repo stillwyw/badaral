@@ -6,7 +6,7 @@ class GroupsController extends AppController {
 	var $components = array('Session','Security','Thumbnail');
 	var $helpers = array('Avatar');
 	var $paginate=array(
-			'limit'=>4,
+			'limit'=>20,
 			'order'=>array('GroupPost.created desc')
 			);
 

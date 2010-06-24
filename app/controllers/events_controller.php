@@ -31,10 +31,19 @@ class EventsController extends AppController {
 		if (!empty($this->data)) {
 			$this->Event->create();
 			if ($this->Event->save($this->data)) {
-				$this->Session->setFlash(__('The event has been saved', true));
+			    $a_data = array(
+			        'EventUser'=>array(
+    			        'user_id'=>$this->cuid,
+    			        'event_id'=>$this->Event->id,
+        			    'role'=>Event::sponsor
+			            )
+			        );
+			    $this->EventUser->create();
+			    $this->EventUser->save($a_data);
+				$this->Session->setFlash(__('活动创建成功！', true));
 				$this->redirect("/group/$this->cggid/");
 			} else {
-				$this->Session->setFlash(__('The event could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('活动创建失败，请稍后再试！', true));
 			}
 		}
 	}

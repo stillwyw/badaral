@@ -109,7 +109,7 @@ var wuc_chatroom = new WUCChatroom(
 		<div id="members">
 			<h3>小组成员</h3>
 			<?php foreach ($members as $member): ?>
-				<?php echo $avatar->userLink($member) ?>
+				<?php echo $avatar->userLink($member['User']) ?>
 			<?php endforeach ?>
 		</div>
 	<div class="actions">

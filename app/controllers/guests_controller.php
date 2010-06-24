@@ -3,6 +3,7 @@ class GuestsController extends AppController {
 
 	var $name = 'Guests';
 	var $components = array('Session');
+	var $helpers = array('Avatar','Format');
 
 	function index() {
 		$this->Guest->recursive = 0;

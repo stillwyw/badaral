@@ -54,10 +54,22 @@ class EventUsersController extends AppController {
 	}
 
 
-	function add() {
-		if (!empty($this->data)) {
+	function add($event_id=null,$type='i') {
+		if (!is_null($event_id)) {
 			$this->EventUser->create();
-			if ($this->EventUser->save($this->data)) {
+			if ($type=='j') {
+			    $role=Event::join;
+			}else{
+			    $role=Event::interest;
+			}
+			$a_data = array(
+			    'EventUser'=>array(
+			        'event_id'=>$event_id,
+			        'user_id'=>$this->cuid,
+    			        'role'=>$role
+			        )
+			    )
+			if ($this->EventUser->save($a_data)) {
 				$this->Session->setFlash(__('The event user has been saved', true));
 				$this->redirect(array('action' => 'index'));
 			} else {
