@@ -3,7 +3,7 @@ class UsersController extends AppController {
 
 	var $name = 'Users';
 	var $components = array('Session','Cookie','Thumbnail','Emailer');
-	var $uses = array('User','Guest','Group','Note');
+	var $uses = array('User','Guest','Group','Note','Word','Language');
 	var $helpers = array('Avatar');
 	
 	function beforeFilter(){
@@ -169,6 +169,7 @@ class UsersController extends AppController {
 			$this->Session->setFlash(__('Invalid user', true));
 			$this->redirect('/');
 		}
+		$words = $this->Word->find('all',array('conditions'=>array('Word.user_id'=>$this->uid),'order'=>'Word.created desc','limit'=>5));
 		$notes = $this->Note->find('all',array('conditions'=>array('Note.user_id'=>$this->uid),'order'=>'Note.created desc','limit'=>5));
 		$guests=$this->Guest->find('all',array('conditions'=>array('Guest.user_id'=>$this->uid),'order'=>'Guest.id desc','limit'=>5));
 		$this->paginate= array(
@@ -182,11 +183,15 @@ class UsersController extends AppController {
 			);
 		$followers_count = $this->Followship->find('count',array('conditions'=>array('Followship.following_id'=>$this->uid)));
 		$followings = $this->paginate('User',array('Followship.user_id'=>$this->uid));
+		
+		$this->set('words', $words);
 		$this->set('followers_count', $followers_count);
 		$this->set('followings',$followings);
 		$this->set('guests', $guests);
 		$this->set('user', $this->user);
 		$this->set('notes',$notes);
+		$languages = $this->Language->find('list');
+		$this->set(compact('languages'));
 	}
 
 
