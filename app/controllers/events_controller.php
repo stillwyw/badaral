@@ -3,6 +3,7 @@ class EventsController extends AppController {
 
 	var $name = 'Events';
 	var $uses = array('Event','EventUser');
+	var $helpers = array('Avatar');
     
 	function index() {
 		$this->Event->recursive = 0;
@@ -14,17 +15,66 @@ class EventsController extends AppController {
 			$this->Session->setFlash(__('Invalid event', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		//$this->Event->recursive=0;
+		$this->Event->recursive=0;
 		$event = $this->Event->read(null, $id);
 		$role = $this->EventUser->find('first',array('conditions'=>array(
 		    'EventUser.user_id'=>$this->cuid,
 		    'EventUser.event_id'=>$id
 		    )
     	));
-    	if (!empty($role) {
-    	    $role = $role['EventUser'][]
+    	$joiners = $this->User->find('all',array(
+    	    'joins'=>array(
+    	        array(
+    	            'table'=>'event_users',
+    	            'alias'=>'EventUser',
+    	            'conditions'=>array(
+    	                'EventUser.user_id = User.id',
+        	                'EventUser.role'=>EventUser::join
+    	                )
+    	            )
+    	        ),
+    	    'conditions'=>array(
+    	        'EventUser.event_id'=>$id
+    	        )
+    	    ));
+    	$interesters = $this->User->find('all',array(
+    	    'joins'=>array(
+    	        array(
+    	            'table'=>'event_users',
+    	            'alias'=>'EventUser',
+    	            'conditions'=>array(
+    	                'EventUser.user_id = User.id',
+        	                'EventUser.role'=>EventUser::interest
+    	                )
+    	            )
+    	        ),
+    	    'conditions'=>array(
+    	        'EventUser.event_id'=>$id
+    	        )
+    	    ));
+    	$sponsor = $this->User->find('first',array(
+    	    'joins'=>array(
+    	        array(
+    	            'table'=>'event_users',
+    	            'alias'=>'EventUser',
+    	            'conditions'=>array(
+    	                'EventUser.user_id = User.id',
+        	                'EventUser.role'=>EventUser::sponsor
+    	                )
+    	            )
+    	        ),
+    	    'conditions'=>array(
+    	        'EventUser.event_id'=>$id
+    	        )
+    	    ));
+    	if (!empty($role)) {
+    	    $role = $role['EventUser']['role'];
     	}
-		$this->set('event', );
+    	$this->set('sponsor', $sponsor);
+    	$this->set('joiners', $joiners);
+    	$this->set('interesters', $interesters);
+		$this->set('event', $event);
+		$this->set('role', $role);
 	}
 	
 	function group($ggid = null){
@@ -46,7 +96,7 @@ class EventsController extends AppController {
 			        'EventUser'=>array(
     			        'user_id'=>$this->cuid,
     			        'event_id'=>$this->Event->id,
-        			    'role'=>Event::sponsor
+        			    'role'=>EventUser::sponsor
 			            )
 			        );
 			    $this->EventUser->create();

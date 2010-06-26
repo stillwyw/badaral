@@ -3,6 +3,7 @@
 <?php echo $avatar->userLink($message['Sender']) ?>  >> <?php echo $avatar->userLink($message['User']) ?><p/>
 <?php echo $message['Message']['title'] ?><p/>
 <?php echo $format->text($message['Message']['body']) ?><p/>
+
 </div>
 <div class="right">
 	<h3><?php __(''); ?></h3>

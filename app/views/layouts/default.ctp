@@ -12,7 +12,7 @@
 <body>
 <div class="content">
   <div class="head">
-    <div class="logo"><img src="/img/logo.gif" /></div>
+    <div class="logo"><img src="/img/logo.jpg" /></div>
     <div class="nav">
       <ul>
     	<li><?php echo $html->link('首页', '/') ?> </li>
