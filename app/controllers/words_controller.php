@@ -2,7 +2,7 @@
 class WordsController extends AppController {
 
 	var $name = 'Words';
-	var $compnents = array('RequestHandler');
+	var $components = array('RequestHandler');
 
 	function index() {
 		$this->Word->recursive = 0;
@@ -22,14 +22,12 @@ class WordsController extends AppController {
 		if (!empty($this->data)) {
 			$this->Word->create();
 			#handle ajax requests.....
-    		if ($this->RequestHandler->isAjax()) { 
-                if ($this->Word->save($this->data)) { 
-                    echo 'success'; 
-                } 
-                Configure::write('debug', 0); 
-                $this->autoRender = false;
-                exit(); 
-            }
+  		if ($this->RequestHandler->isAjax()){
+						if ($this->Word->save($this->data)){ 
+									echo 'success';
+              } 
+              exit; 
+      }
 			if ($this->Word->save($this->data)) {
 				$this->Session->setFlash(__('The word has been saved', true));
 				$this->redirect(array('action' => 'index'));

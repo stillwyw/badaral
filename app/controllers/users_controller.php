@@ -47,7 +47,7 @@ class UsersController extends AppController {
    	 				        $this->Session->setFlash('email not sent');
 	 				    }*/
 	 				    
-						//$this->redirect("home"); 					
+						$this->redirect("home"); 					
 	 				}else{
                                      	}
  				}else{

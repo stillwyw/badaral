@@ -1,11 +1,8 @@
-
+<?php echo $html->script('jquery-1.4.2.min.js') ?>
+<?php echo $html->script('dibai.js') ?>
 <div class='left'>
-	
+<h2><?php echo $avatar->userLink($user['User']) ?><?php echo $user['User']['username'] ?></h2>
 
-<h2><?php echo $user['User']['username'] ?></h2>
-	<ul>
-		<li><?php echo $avatar->userLink($user['User']);?> </li>
-	</ul>
 <div id="note">
 <h2><?php __('我的日记');?></h2>
 	<table cellpadding="0" cellspacing="0">
@@ -32,13 +29,16 @@
 </div>
 <div id="words">
     <h2>我的单词</h2>
-    	<?php
-		echo $this->Form->input('word');
-		echo $this->Form->input('description');
-		echo $this->Form->hidden('user_id',array('value'=>$cuid));
-		echo $this->Form->input('language_id');
-		echo $this->Form->submit('添加');
-	?>
+			
+		<?php echo $this->Form->create('Word',array('url'=>'','id'=>'submitWordForm','onSubmit'=>'return commitForm(this);')); ?>
+		单词：<?php echo $this->Form->text('word',array('size'=>10)); ?>
+		解释：<?php echo $this->Form->text('description',array('size'=>30));?>	
+		<?php echo $this->Form->hidden('user_id',array('value'=>$cuid)); ?>	
+		<?php echo $this->Form->input('language_id',array('label'=>'语言：')); ?>
+		<?php echo $this->Form->submit('添加'); ?>
+
+	
+	
     <table width=80% border="0" cellspacing="5" cellpadding="5">
         <tr><th>单词</th><th>解释</th><th>语言</th></tr>
         
