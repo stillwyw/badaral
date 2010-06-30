@@ -3,6 +3,7 @@ class WordsController extends AppController {
 
 	var $name = 'Words';
 	var $components = array('RequestHandler');
+	var $uses = array('Language','Word');
 
 	function index() {
 		$this->Word->recursive = 0;
@@ -23,8 +24,16 @@ class WordsController extends AppController {
 			$this->Word->create();
 			#handle ajax requests.....
   		if ($this->RequestHandler->isAjax()){
-						if ($this->Word->save($this->data)){ 
-									echo 'success';
+			if ($this->Word->save($this->data)){ 
+				$this->autoRender = false;
+				$word = array();
+				$word['word']=$this->data['Word']['word'];
+				$word['description']=$this->data['Word']['description'];
+				$language = $this->Language->findById($this->data['Word']['language_id']);
+				$language = $language['Language']['name'];
+				$word['language']=$language;
+				$json = json_encode($word);
+				echo $json;
               } 
               exit; 
       }

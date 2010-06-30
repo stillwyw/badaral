@@ -24,6 +24,22 @@ class GuestsController extends AppController {
 		}
 		if (!empty($this->data)) {
 			$this->Guest->create();
+			/*  //ajax handling
+			if ($this->RequestHandler->isAjax()){
+				if ($this->Word->save($this->data)){ 
+					$this->autoRender = false;
+					$guest = array();
+					$guest['body']=$this->data['Guest']['boby'];
+					$guest['created']=$this->data['Guest']['created'];
+					$language = $this->Language->findById($this->data['Word']['language_id']);
+					$language = $language['Language']['name'];
+					$word['language']=$language;
+					$json = json_encode($word);
+					echo $json;
+	              } 
+	              exit; 
+	      		}
+	      	*/
 			if ($this->Guest->save($this->data)) {
 				$this->Session->setFlash(__('The guest has been saved', true));
 				$this->redirect($this->referer());
